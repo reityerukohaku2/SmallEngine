@@ -10,7 +10,8 @@ namespace SmallEngine
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Form1 form1 = new Form1();
+            Application.Run(form1);
         }
     }
 }
