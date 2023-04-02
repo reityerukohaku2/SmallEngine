@@ -117,7 +117,10 @@ namespace SmallEngine
             deviceContext.RSSetViewport(vp);
         }
 
-
+        void CreateCommandList()
+        {
+            
+        }
         
     }
 }
