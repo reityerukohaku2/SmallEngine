@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "SmallEnginePlus.h"
+#include "Direct3D.h"
 
 #define MAX_LOADSTRING 100
 
@@ -43,14 +44,34 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
     // メイン メッセージ ループ:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    // 改めゲームループ
+    // while (GetMessage(&msg, nullptr, 0, 0))
+    while(true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        /*if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
+        }*/
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+            if (msg.message == WM_QUIT) {
+                break;
+            }
+            else {
+                TranslateMessage(&msg);
+                DispatchMessageW(&msg);
+            }
         }
+
+        float color[4] = {0.5f, 0.5f, 1.0f, 1.0f};
+        D3D.GetDeviceContext()->ClearRenderTargetView(D3D.GetBackBufferView().Get(), color);
+
+        // バックバッファの内容を画面に表示
+        D3D.GetSwapChain()->Present(1, 0);
     }
+
+    // インスタンス削除
+    D3D.DeleteInstance();
 
     return (int) msg.wParam;
 }
@@ -104,6 +125,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    {
       return FALSE;
    }
+
+   // 初期化
+   D3D.Initialize(hWnd, 1920, 1080);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
