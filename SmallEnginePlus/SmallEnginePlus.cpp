@@ -63,11 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             }
         }
 
-        float color[4] = {0.5f, 0.5f, 1.0f, 1.0f};
-        D3D.GetDeviceContext()->ClearRenderTargetView(D3D.GetBackBufferView().Get(), color);
-
-        // バックバッファの内容を画面に表示
-        D3D.GetSwapChain()->Present(1, 0);
+        D3D.Render();
     }
 
     // インスタンス削除
@@ -127,7 +123,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    }
 
    // 初期化
-   D3D.Initialize(hWnd, 1920, 1080);
+   D3D.Initialize(hWnd);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
