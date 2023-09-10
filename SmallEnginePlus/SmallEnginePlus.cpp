@@ -45,14 +45,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // メイン メッセージ ループ:
     // 改めゲームループ
-    // while (GetMessage(&msg, nullptr, 0, 0))
     while(true)
     {
-        /*if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }*/
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
             if (msg.message == WM_QUIT) {
                 break;
@@ -124,6 +118,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    // 初期化
    D3D.Initialize(hWnd);
+   D3D.InitModels ();
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
