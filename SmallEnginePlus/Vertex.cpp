@@ -18,12 +18,12 @@ Vertex::~Vertex () {}
 /// </summary>
 /// <param name="positions">頂点座標群</param>
 /// <returns>頂点情報の配列</returns>
-vector<shared_ptr<Vertex>> Vertex::CreateVerticesFromXMFloat3Array (vector<shared_ptr<XMFLOAT3>> positions) {
+vector<shared_ptr<Vertex>> Vertex::CreateVerticesFromXMFloat3Array (vector<XMFLOAT3> positions) {
 	vector<shared_ptr<Vertex>> vertexArray = {};
 
 	// positionsからpositionを取り出し、Vertexオブジェクトを生成
 	for (const auto position : positions) {
-		shared_ptr<Vertex> vertex = make_shared<Vertex> (*position);
+		shared_ptr<Vertex> vertex = make_shared<Vertex> (position);
 
 		// VertexオブジェクトのスマートポインタをvertexArrayに格納していく
 		vertexArray.push_back (vertex);

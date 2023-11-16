@@ -24,7 +24,7 @@ public:
 	/// </summary>
 	/// <param name="positions">頂点座標群</param>
 	/// <returns>頂点情報の配列</returns>
-	static vector<shared_ptr<Vertex>> CreateVerticesFromXMFloat3Array (vector<shared_ptr<XMFLOAT3>> positions);
+	static vector<shared_ptr<Vertex>> CreateVerticesFromXMFloat3Array (vector<XMFLOAT3> positions);
 private:
 	/// <summary>
 	/// 頂点座標

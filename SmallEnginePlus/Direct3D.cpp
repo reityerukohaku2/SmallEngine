@@ -211,23 +211,11 @@ HRESULT Direct3D::InitModels () {
 		{ 0.5f, -0.5f , 0.0f },
 	};
 
-	vector<com_ptr<Vertex>> vertices = Vertex::CreateVerticesFromXMFloat3Array (vertexPositions);
-	IGeometry tryangle = winrt::make<Geometry>(vertices);
+	// 頂点配列の作成
+	vector<shared_ptr<Vertex>> vertices = Vertex::CreateVerticesFromXMFloat3Array (vertexPositions);
 
-	// 頂点バッファ作成
-	const UINT vertexBufferSize = sizeof(tryangle);
-
-	// D3D12_HEAP_TYPE_UPLOAD: DEFAULTほど高速ではないがCPUから見える
-	CD3DX12_HEAP_PROPERTIES heapProperties = CD3DX12_HEAP_PROPERTIES (D3D12_HEAP_TYPE_UPLOAD);
-	CD3DX12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer (vertexBufferSize);
-
-	m_device->CreateCommittedResource(
-		&heapProperties,
-		D3D12_HEAP_FLAG_NONE,
-		&desc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		__uuidof(m_vertexBuffer), m_vertexBuffer.put_void());
+	// 頂点配列から形状の生成
+	com_ptr<Geometry> geometry = winrt::make<Geometry> (vertices);
 
 	// 頂点バッファに頂点情報の書き込み
 	UINT8* pVertexDataBegin;

@@ -20,13 +20,13 @@ public:
 	/// </summary>
 	/// <param name="vertices">頂点</param>
 	/// <param name="indices">頂点インデックス</param>
-	Geometry (vector<shared_ptr<Vertex>> vertices, vector<shared_ptr<VertexIndex>> indices);
+	Geometry (vector<shared_ptr<Vertex>> vertices, vector<shared_ptr<VertexIndex>> indices, com_ptr<VertexBuffer> vertexBuffer);
 
 	/// <summary>
 	/// コンストラクタ(頂点インデックスなし)
 	/// </summary>
 	/// <param name="vertices">頂点</param>
-	Geometry (vector<shared_ptr<Vertex>> vertices);
+	Geometry (vector<shared_ptr<Vertex>> vertices, com_ptr<VertexBuffer> vertexBuffer);
 
 	/// <summary>
 	/// デストラクタ
@@ -65,5 +65,5 @@ private:
 	/// <summary>
 	/// 頂点バッファ
 	/// </summary>
-	VertexBuffer m_vertexBuffer;
+	com_ptr<VertexBuffer> m_vertexBuffer;
 };

@@ -8,13 +8,16 @@ VertexBuffer::VertexBuffer (com_ptr<ID3D12Device> device, UINT vertexBufferSize)
 	CD3DX12_HEAP_PROPERTIES heapProperties = CD3DX12_HEAP_PROPERTIES (D3D12_HEAP_TYPE_UPLOAD);
 	CD3DX12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer (vertexBufferSize);
 
+	com_ptr<VertexBuffer> vertexBuffer;
+
 	device->CreateCommittedResource (
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&desc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		__uuidof(m_resource), m_resource.put_void ());
+		__uuidof(ID3D12Resource), vertexBuffer.put_void());
+
 }
 
 HRESULT __stdcall VertexBuffer::QueryInterface (REFIID riid, void** ppvObject)
@@ -59,11 +62,12 @@ HRESULT __stdcall VertexBuffer::GetDevice (REFIID riid, void** ppvDevice)
 
 HRESULT __stdcall VertexBuffer::Map (UINT Subresource, const D3D12_RANGE* pReadRange, void** ppData)
 {
-	return E_NOTIMPL;
+	return m_resource->Map (Subresource, pReadRange, ppData);
 }
 
 void __stdcall VertexBuffer::Unmap (UINT Subresource, const D3D12_RANGE* pWrittenRange)
 {
+	return m_resource->Unmap (Subresource, pWrittenRange);
 }
 
 D3D12_RESOURCE_DESC __stdcall VertexBuffer::GetDesc (void)
