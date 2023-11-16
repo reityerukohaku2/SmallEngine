@@ -41,10 +41,9 @@ bool Direct3D::Initialize(HWND hWnd)
 	UINT dxgiFactoryFlags = 0;
 #if defined(_DEBUG)	
 	
-	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(debugController.GetAddressOf()))))
-	{
-		debugController->EnableDebugLayer();
-	}
+	winrt::check_hresult(D3D12GetDebugInterface(__uuidof( debugController), debugController.put_void()));
+	debugController->EnableDebugLayer();
+
 #endif
 
 	//=====================================================
@@ -55,9 +54,7 @@ bool Direct3D::Initialize(HWND hWnd)
 	// デバイスを作成
 	{
 		D3D_FEATURE_LEVEL futureLevel = D3D_FEATURE_LEVEL_12_0;
-		if (FAILED(D3D12CreateDevice(nullptr, D3D_FEATURE_LEVEL_12_0, IID_PPV_ARGS(m_device.GetAddressOf())))) {
-			return false;
-		}
+		winrt::check_hresult (D3D12CreateDevice (nullptr, D3D_FEATURE_LEVEL_12_0, __uuidof(m_device), m_device.put_void ()));
 	}
 
 	// コマンドキューの作成
@@ -65,19 +62,13 @@ bool Direct3D::Initialize(HWND hWnd)
 		D3D12_COMMAND_QUEUE_DESC queueDesc = {};
 		queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
 		queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
-		if (FAILED(m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(m_commandQueue.GetAddressOf())))) {
-			return false;
-		}
+		winrt::check_hresult (m_device->CreateCommandQueue (&queueDesc, __uuidof(m_commandQueue), m_commandQueue.put_void ()));
 	}
 
 	// コマンドアロケータとコマンドリストの作成
 	{
-		if (FAILED(m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(m_commandAllocator.GetAddressOf())))) {
-			return false;
-		}
-		if (FAILED(m_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, m_commandAllocator.Get(), NULL, IID_PPV_ARGS(m_commandList.GetAddressOf())))) {
-			return false;
-		}
+		winrt::check_hresult (m_device->CreateCommandAllocator (D3D12_COMMAND_LIST_TYPE_DIRECT, __uuidof(m_commandAllocator), m_commandAllocator.put_void()));
+		winrt::check_hresult (m_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, m_commandAllocator.get(), NULL, __uuidof(m_commandList), m_commandList.put_void()));
 	}
 
 	// スワップチェインの作成
@@ -90,9 +81,9 @@ bool Direct3D::Initialize(HWND hWnd)
 		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 		swapChainDesc.SampleDesc.Count = 1;
-		IDXGIFactory4* factory;
-		CreateDXGIFactory1(IID_PPV_ARGS(&factory));
-		factory->CreateSwapChainForHwnd(m_commandQueue.Get(), hWnd, &swapChainDesc, NULL, NULL, (IDXGISwapChain1**)m_swapChain.GetAddressOf());
+		com_ptr<IDXGIFactory4> factory;
+		CreateDXGIFactory1(__uuidof(factory), factory.put_void());
+		factory->CreateSwapChainForHwnd(m_commandQueue.get(), hWnd, &swapChainDesc, NULL, NULL, (IDXGISwapChain1**)m_swapChain.put());
 	}
 
 	//コンスタントバッファ作成
@@ -107,14 +98,14 @@ bool Direct3D::Initialize(HWND hWnd)
 			&desc,
 			D3D12_RESOURCE_STATE_GENERIC_READ,
 			nullptr,
-			IID_PPV_ARGS(m_constantBuffer.GetAddressOf()));
+			__uuidof(m_constantBuffer), m_constantBuffer.put_void());
 
 		//コンスタントバッファビューのヒープ作成
 		D3D12_DESCRIPTOR_HEAP_DESC cbvHeapDesc = {};
 		cbvHeapDesc.NumDescriptors = 1;
 		cbvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 		cbvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-		m_device->CreateDescriptorHeap(&cbvHeapDesc, IID_PPV_ARGS(m_descHeap.GetAddressOf()));
+		m_device->CreateDescriptorHeap(&cbvHeapDesc, __uuidof(m_descHeap), m_descHeap.put_void());
 
 		//コンスタントバッファビュー作成
 		D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc = {};
@@ -138,15 +129,15 @@ bool Direct3D::Initialize(HWND hWnd)
 		// 全フレーム分作成する
 		for (UINT n = 0; n < kFrameCount; n++)
 		{
-			m_swapChain->GetBuffer(n, IID_PPV_ARGS(m_renderTargets[n].GetAddressOf()));
-			m_device->CreateRenderTargetView(m_renderTargets[n].Get(), NULL, rtvHandle);
+			m_swapChain->GetBuffer(n, __uuidof(m_renderTargets[n]), m_renderTargets[n].put_void());
+			m_device->CreateRenderTargetView(m_renderTargets[n].get(), NULL, rtvHandle);
 			rtvHandle.Offset(1, m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV));
 		}
 	}
 	
 	// フェンスの作成
 	{
-		if (FAILED(m_device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(m_fence.GetAddressOf())))) {
+		if (FAILED(m_device->CreateFence(0, D3D12_FENCE_FLAG_NONE, __uuidof(m_fence), m_fence.put_void()))) {
 			return false;
 		}
 		m_fenceValue = 1;
@@ -167,7 +158,7 @@ bool Direct3D::Initialize(HWND hWnd)
 		ID3DBlob* signature;
 		ID3DBlob* error;
 		D3DX12SerializeVersionedRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1, &signature, &error);
-		m_device->CreateRootSignature(0, signature->GetBufferPointer(), signature->GetBufferSize(), IID_PPV_ARGS(m_rootSignature.GetAddressOf()));
+		m_device->CreateRootSignature(0, signature->GetBufferPointer(), signature->GetBufferSize(), __uuidof(m_rootSignature), m_rootSignature.put_void());
 	}
 
 	//シェーダー作成
@@ -188,7 +179,7 @@ bool Direct3D::Initialize(HWND hWnd)
 	{
 		D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
 		psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
-		psoDesc.pRootSignature = m_rootSignature.Get();
+		psoDesc.pRootSignature = m_rootSignature.get();
 		psoDesc.VS = CD3DX12_SHADER_BYTECODE(vertexShader);
 		psoDesc.PS = CD3DX12_SHADER_BYTECODE(pixelShader);
 		psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
@@ -201,7 +192,7 @@ bool Direct3D::Initialize(HWND hWnd)
 		psoDesc.NumRenderTargets = 1;
 		psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 		psoDesc.SampleDesc.Count = 1;
-		m_device->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(m_pipelineState.GetAddressOf()));
+		m_device->CreateGraphicsPipelineState(&psoDesc, __uuidof(m_pipelineState), m_pipelineState.put_void());
 	}
 
 	return true;
@@ -213,15 +204,20 @@ bool Direct3D::Initialize(HWND hWnd)
 /// <returns>成功したらSUCCEEDED</returns>
 HRESULT Direct3D::InitModels () {
 	// 頂点の作成
-	XMFLOAT3 vertex[] = 
+	vector<XMFLOAT3> vertexPositions = 
 	{
-		{-1.0f, 0.0f, 0.0f}, 
-		{1.0f, 0.0f, 0.0f},
+		{ -0.5f, 0.5f , 0.0f },
+		{ -0.5f, -0.5f , 0.0f },
+		{ 0.5f, -0.5f , 0.0f },
 	};
 
-	// 頂点バッファ作成
-	const UINT vertexBufferSize = sizeof(vertex);
+	vector<com_ptr<Vertex>> vertices = Vertex::CreateVerticesFromXMFloat3Array (vertexPositions);
+	IGeometry tryangle = winrt::make<Geometry>(vertices);
 
+	// 頂点バッファ作成
+	const UINT vertexBufferSize = sizeof(tryangle);
+
+	// D3D12_HEAP_TYPE_UPLOAD: DEFAULTほど高速ではないがCPUから見える
 	CD3DX12_HEAP_PROPERTIES heapProperties = CD3DX12_HEAP_PROPERTIES (D3D12_HEAP_TYPE_UPLOAD);
 	CD3DX12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer (vertexBufferSize);
 
@@ -231,13 +227,13 @@ HRESULT Direct3D::InitModels () {
 		&desc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(m_vertexBuffer.GetAddressOf()));
+		__uuidof(m_vertexBuffer), m_vertexBuffer.put_void());
 
 	// 頂点バッファに頂点情報の書き込み
 	UINT8* pVertexDataBegin;
 	CD3DX12_RANGE readRange(0, 0);
 	m_vertexBuffer->Map(0, &readRange, (void**)&pVertexDataBegin);
-	memcpy(pVertexDataBegin, vertex, vertexBufferSize);
+	memcpy(pVertexDataBegin, tryangle.GetVertexArray(), vertexBufferSize);
 	m_vertexBuffer->Unmap(0, NULL);
 
 	// バーテックスバッファビュー作成
@@ -259,7 +255,7 @@ void Direct3D::Render() {
 	m_commandAllocator->Reset();
 
 	// コマンドリストをリセットする
-	m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get());
+	m_commandList->Reset(m_commandAllocator.get(), m_pipelineState.get());
 
 
 	// ================================================
@@ -267,7 +263,7 @@ void Direct3D::Render() {
 	// ================================================
 	
 	// バックバッファのトランジションをレンダーターゲットモードにする
-	D3D12_RESOURCE_BARRIER render_target_mode_barrier = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[backBufferIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	D3D12_RESOURCE_BARRIER render_target_mode_barrier = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[backBufferIndex].get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 	m_commandList->ResourceBarrier(1, &render_target_mode_barrier);
 
 	// バックバッファをレンダーターゲットにセット
@@ -286,10 +282,10 @@ void Direct3D::Render() {
 	m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, NULL);
 
 	//ルートシグネチャをセット
-	m_commandList->SetGraphicsRootSignature(m_rootSignature.Get());
+	m_commandList->SetGraphicsRootSignature(m_rootSignature.get());
 
 	// ディスクリプタヒープ（アプリにただ1つだけ）をセット
-	ID3D12DescriptorHeap* ppHeaps[] = { m_descHeap.Get()};
+	ID3D12DescriptorHeap* ppHeaps[] = { m_descHeap.get()};
 	m_commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
 	//World View Projection 変換
@@ -303,17 +299,17 @@ void Direct3D::Render() {
 
 	viewMat = XMMatrixLookToRH (XMLoadFloat3 (&eyeVec), XMLoadFloat3 (&dirVec), XMLoadFloat3 (&upVec));
 	// プロジェクショントランスフォーム
-	projMat = XMMatrixPerspectiveFovRH (3.14159 / 4, (FLOAT)kWindowWidth / (FLOAT)kWindowHeight, 0.1f, 1000.0f);
+	projMat = XMMatrixPerspectiveFovRH (3.14159f / 4.0f, (FLOAT)kWindowWidth / (FLOAT)kWindowHeight, 0.1f, 1000.0f);
 
 	//ポリゴントポロジーの指定
-	m_commandList->IASetPrimitiveTopology (D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	m_commandList->IASetPrimitiveTopology (D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	//バーテックスバッファをセット
 	m_commandList->IASetVertexBuffers (0, 1, &m_vertexBufferView);
 
 	//描画
 	static float r = 0;
-	r += 0.05;
+	r += 0.05f;
 	rotMat = XMMatrixRotationZ (r);//単純にyaw回転させる
 
 	//コンスタントバッファの内容を更新
@@ -333,18 +329,18 @@ void Direct3D::Render() {
 	m_commandList->SetGraphicsRootDescriptorTable (0, cbvSrvUavDescHeap);
 
 	//描画
-	m_commandList->DrawInstanced (2, 1, 0, 0);
+	m_commandList->DrawInstanced (3, 1, 0, 0);
 
 
 	// バックバッファのトランジションをPresentモードにする
-	D3D12_RESOURCE_BARRIER present_mode_barrier = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[backBufferIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+	D3D12_RESOURCE_BARRIER present_mode_barrier = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[backBufferIndex].get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 	m_commandList->ResourceBarrier(1, &present_mode_barrier);
 
 	// コマンドの書き込みはここで終わり、Closeする
 	m_commandList->Close();
 
 	// コマンドリストの実行
-	ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
+	ID3D12CommandList* ppCommandLists[] = { m_commandList.get() };
 	m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
 	//バックバッファをフロントバッファに切り替えてシーンをモニターに表示
@@ -359,7 +355,7 @@ void Direct3D::Render() {
 /// </summary>
 void Direct3D::WaitGpu() {
 	//GPUサイドが全て完了したときにGPUサイドから返ってくる値（フェンス値）をセット
-	m_commandQueue->Signal(m_fence.Get(), m_fenceValue);
+	m_commandQueue->Signal(m_fence.get(), m_fenceValue);
 
 	//上でセットしたシグナルがGPUから帰ってくるまでストール（この行で待機）
 	do

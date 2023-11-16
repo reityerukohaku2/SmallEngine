@@ -1,7 +1,7 @@
-﻿// SmallEnginePlus.cpp : アプリケーションのエントリ ポイントを定義します。
+// SmallEnginePlus.cpp : アプリケーションのエントリ ポイントを定義します。
 //
 
-#include "framework.h"
+#include "pch.h"
 #include "SmallEnginePlus.h"
 #include "Direct3D.h"
 
@@ -62,6 +62,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // インスタンス削除
     D3D.DeleteInstance();
+
+    // メモリリークレポート出力
+    _CrtDumpMemoryLeaks ();
 
     return (int) msg.wParam;
 }

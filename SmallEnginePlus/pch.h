@@ -1,4 +1,4 @@
-﻿// header.h : 標準のシステム インクルード ファイルのインクルード ファイル、
+// header.h : 標準のシステム インクルード ファイルのインクルード ファイル、
 // またはプロジェクト専用のインクルード ファイル
 //
 
@@ -13,3 +13,4 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+#include <winrt/base.h>

@@ -14,17 +14,20 @@
 #include <dxgi1_4.h>
 #include <DirectXMath.h>
 #include <D3Dcompiler.h>
+#include <winrt/base.h>
+#include <winrt/Windows.Foundation.h>
 
-// ComPtrを使用できるようにする
-#include <wrl/client.h>
-using Microsoft::WRL::ComPtr;
+#include "Geometry.h"
 
+using winrt::com_ptr;
+using namespace std;
 using namespace DirectX;
 
 #define kWindowWidth 1280		//ウィンドウ幅
 #define kWindowHeight 720		//ウィンドウ高さ
 #define kAppName "初期化"
 #define kFrameCount 3			//画面バッファ数
+#define ARRAY_LENGTH(array) (sizeof(array) / sizeof(array[0]))
 
 //=========================================
 // Direct3Dクラス
@@ -70,6 +73,7 @@ public:
 	HRESULT InitModels ();
 
 private:
+
 	//コンスタントバッファ
 	struct Cbuffer
 	{
@@ -84,61 +88,61 @@ private:
 	/// <summary>
 	/// デバッグコントローラ
 	/// </summary>
-	ComPtr<ID3D12Debug>					debugController;
+	com_ptr<ID3D12Debug>					debugController;
 
 	/// <summary>
 	/// Direct3Dデバイス
 	/// </summary>
-	ComPtr<ID3D12Device>				m_device;
+	com_ptr<ID3D12Device>				m_device;
 
 	/// <summary>
 	/// コマンドアロケーター
 	/// </summary>
-	ComPtr<ID3D12CommandAllocator>		m_commandAllocator;
+	com_ptr<ID3D12CommandAllocator>		m_commandAllocator;
 
 	/// <summary>
 	/// コマンドリスト
 	/// </summary>
-	ComPtr<ID3D12GraphicsCommandList>	m_commandList;
+	com_ptr<ID3D12GraphicsCommandList>	m_commandList;
 
 	/// <summary>
 	/// コマンドキュー
 	/// </summary>
-	ComPtr<ID3D12CommandQueue>			m_commandQueue;
+	com_ptr<ID3D12CommandQueue>			m_commandQueue;
 
 	/// <summary>
 	/// スワップチェイン
 	/// </summary>
-	ComPtr<IDXGISwapChain3>				m_swapChain;
+	com_ptr<IDXGISwapChain3>				m_swapChain;
 
 	/// <summary>
 	/// レンダーターゲットビュー
 	/// </summary>
-	ComPtr <ID3D12Resource>				m_renderTargets[kFrameCount];
-	ComPtr <ID3D12DescriptorHeap>		m_rtvHeap;
+	com_ptr <ID3D12Resource>				m_renderTargets[kFrameCount];
+	com_ptr <ID3D12DescriptorHeap>		m_rtvHeap;
 
 	/// <summary>
 	/// コンスタントバッファ
 	/// </summary>
-	ComPtr <ID3D12Resource> m_constantBuffer;
-	ComPtr <ID3D12DescriptorHeap> m_descHeap;
+	com_ptr <ID3D12Resource> m_constantBuffer;
+	com_ptr <ID3D12DescriptorHeap> m_descHeap;
 
 	/// <summary>
 	/// 頂点バッファ
 	/// </summary>
-	ComPtr <ID3D12Resource>				m_vertexBuffer;
+	com_ptr <ID3D12Resource>				m_vertexBuffer;
 	D3D12_VERTEX_BUFFER_VIEW			m_vertexBufferView;
 
 	/// <summary>
 	/// インデックスバッファ
 	/// </summary>
-	ComPtr <ID3D12Resource>				m_indexBuffer;
+	com_ptr <ID3D12Resource>				m_indexBuffer;
 	D3D12_INDEX_BUFFER_VIEW				m_indexBufferView;
 
 	/// <summary>
 	/// フェンス
 	/// </summary>
-	ComPtr<ID3D12Fence>					m_fence;
+	com_ptr<ID3D12Fence>					m_fence;
 
 	/// <summary>
 	/// フェンス値を格納する場所
@@ -148,12 +152,12 @@ private:
 	/// <summary>
 	/// ルートシグネチャ
 	/// </summary>
-	ComPtr <ID3D12RootSignature>		m_rootSignature;
+	com_ptr <ID3D12RootSignature>		m_rootSignature;
 		
 	/// <summary>
 	/// パイプラインステートオブジェクト
 	/// </summary>
-	ComPtr <ID3D12PipelineState>		m_pipelineState;
+	com_ptr <ID3D12PipelineState>		m_pipelineState;
 
 
 	// 唯一のインスタンス用のポインタ
