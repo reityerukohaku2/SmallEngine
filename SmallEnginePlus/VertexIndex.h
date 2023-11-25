@@ -1,25 +1,24 @@
 #pragma once
 #include "pch.h"
-
 /// <summary>
-/// é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+/// ’¸“_ƒCƒ“ƒfƒbƒNƒX
 /// </summary>
 class VertexIndex
 {
 public:
 	/// <summary>
-	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 	/// </summary>
-	/// <param name="index">é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+	/// <param name="index">’¸“_ƒCƒ“ƒfƒbƒNƒX</param>
 	VertexIndex (DWORD index);
 
 	/// <summary>
-	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// ƒfƒXƒgƒ‰ƒNƒ^
 	/// </summary>
 	~VertexIndex ();
 private:
 	/// <summary>
-	/// é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+	/// ’¸“_ƒCƒ“ƒfƒbƒNƒX
 	/// </summary>
 	DWORD m_index;
 };

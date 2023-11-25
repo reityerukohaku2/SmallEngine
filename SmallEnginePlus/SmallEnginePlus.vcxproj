@@ -25,6 +25,7 @@
     <ProjectGuid>{7ad1409c-b3ef-4e8a-be6c-7fdce9a4c8a7}</ProjectGuid>
     <RootNamespace>SmallEnginePlus</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <CppWinRTProjectLanguage>C++/WinRT</CppWinRTProjectLanguage>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,15 +79,18 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/bigobj /await %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,17 +116,18 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalOptions>/bigobj /await %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,9 +149,12 @@
   <ItemGroup>
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="Direct3D.h" />
+    <ClInclude Include="GeometryCollection.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="ResourceFactory.h" />
     <ClInclude Include="SmallEnginePlus.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Vertex.h" />
@@ -156,6 +164,9 @@
   <ItemGroup>
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="GeometryCollection.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ResourceFactory.cpp" />
     <ClCompile Include="SmallEnginePlus.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />

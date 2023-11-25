@@ -1,31 +1,32 @@
+#include "pch.h"
 #include "Vertex.h"
 
 /// <summary>
-/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 /// </summary>
-/// <param name="pos">é ‚ç‚¹ä½ç½®</param>
+/// <param name="pos">’¸“_ˆÊ’u</param>
 Vertex::Vertex (XMFLOAT3 pos) {
 	this->m_pos = pos;
 }
 
 /// <summary>
-/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+/// ƒfƒXƒgƒ‰ƒNƒ^
 /// </summary>
 Vertex::~Vertex () {}
 
 /// <summary>
-/// è¤‡æ•°ã®é ‚ç‚¹åº§æ¨™ã‹ã‚‰é ‚ç‚¹æƒ…å ±ã®é…åˆ—ã‚’ç”Ÿæˆã™ã‚‹
+/// •¡”‚Ì’¸“_À•W‚©‚ç’¸“_î•ñ‚Ì”z—ñ‚ğ¶¬‚·‚é
 /// </summary>
-/// <param name="positions">é ‚ç‚¹åº§æ¨™ç¾¤</param>
-/// <returns>é ‚ç‚¹æƒ…å ±ã®é…åˆ—</returns>
-vector<shared_ptr<Vertex>> Vertex::CreateVerticesFromXMFloat3Array (vector<XMFLOAT3> positions) {
-	vector<shared_ptr<Vertex>> vertexArray = {};
+/// <param name="positions">’¸“_À•WŒQ</param>
+/// <returns>’¸“_î•ñ‚Ì”z—ñ</returns>
+vector<Vertex> Vertex::CreateVerticesFromXMFloat3Array (vector<XMFLOAT3> positions) {
+	vector<Vertex> vertexArray = {};
 
-	// positionsã‹ã‚‰positionã‚’å–ã‚Šå‡ºã—ã€Vertexã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆ
+	// positions‚©‚çposition‚ğæ‚èo‚µAVertexƒIƒuƒWƒFƒNƒg‚ğ¶¬
 	for (const auto position : positions) {
-		shared_ptr<Vertex> vertex = make_shared<Vertex> (position);
+		Vertex vertex = Vertex (position);
 
-		// Vertexã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿ã‚’vertexArrayã«æ ¼ç´ã—ã¦ã„ã
+		// VertexƒIƒuƒWƒFƒNƒg‚ÌƒXƒ}[ƒgƒ|ƒCƒ“ƒ^‚ğvertexArray‚ÉŠi”[‚µ‚Ä‚¢‚­
 		vertexArray.push_back (vertex);
 	}
 

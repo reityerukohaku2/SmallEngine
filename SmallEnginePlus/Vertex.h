@@ -1,39 +1,36 @@
 #pragma once
-#include <DirectXMath.h>
-#include <d3d12.h>
 #include "pch.h"
-
 using namespace DirectX;
 using namespace std;
 using winrt::com_ptr;
 using std::shared_ptr;
 
 /// <summary>
-/// é ‚ç‚¹æƒ…å ±ã‚’æŒã¤ã‚¯ãƒ©ã‚¹
+/// ’¸“_î•ñ‚ğ‚ÂƒNƒ‰ƒX
 /// </summary>
 class Vertex
 {
 public:
 	/// <summary>
-	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// </summary>
+	/// <param name="pos">’¸“_ˆÊ’u</param>
+	Vertex (XMFLOAT3 pos);
+
+	/// <summary>
+	/// ƒfƒXƒgƒ‰ƒNƒ^
 	/// </summary>
 	~Vertex ();
 
 	/// <summary>
-	/// è¤‡æ•°ã®é ‚ç‚¹åº§æ¨™ã‹ã‚‰é ‚ç‚¹æƒ…å ±ã®é…åˆ—ã‚’ç”Ÿæˆã™ã‚‹
+	/// •¡”‚Ì’¸“_À•W‚©‚ç’¸“_î•ñ‚Ì”z—ñ‚ğ¶¬‚·‚é
 	/// </summary>
-	/// <param name="positions">é ‚ç‚¹åº§æ¨™ç¾¤</param>
-	/// <returns>é ‚ç‚¹æƒ…å ±ã®é…åˆ—</returns>
-	static vector<shared_ptr<Vertex>> CreateVerticesFromXMFloat3Array (vector<XMFLOAT3> positions);
+	/// <param name="positions">’¸“_À•WŒQ</param>
+	/// <returns>’¸“_î•ñ‚Ì”z—ñ</returns>
+	static vector<Vertex> CreateVerticesFromXMFloat3Array (vector<XMFLOAT3> positions);
 private:
 	/// <summary>
-	/// é ‚ç‚¹åº§æ¨™
+	/// ’¸“_À•W
 	/// </summary>
 	XMFLOAT3 m_pos;
-
-	/// <summary>
-	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
-	/// </summary>
-	/// <param name="pos">é ‚ç‚¹ä½ç½®</param>
-	Vertex (XMFLOAT3 pos);
 };

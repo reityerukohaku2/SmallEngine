@@ -1,6 +1,4 @@
 #pragma once
-#include <vector>
-#include <d3d12.h>
 #include "pch.h"
 #include "Vertex.h"
 #include "VertexIndex.h"
@@ -10,60 +8,63 @@ using namespace std;
 using winrt::com_ptr;
 
 /// <summary>
-/// é ‚ç‚¹ã‚’çµ„ã¿åˆã‚ã›ãŸå½¢çŠ¶
+/// ’¸“_‚ğ‘g‚İ‡‚í‚¹‚½Œ`ó
 /// </summary>
-class Geometry : public winrt::implements<Geometry>
+class Geometry
 {
 public:
 	/// <summary>
-	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚ã‚Š)
+	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^(’¸“_ƒCƒ“ƒfƒbƒNƒX‚ ‚è)
 	/// </summary>
-	/// <param name="vertices">é ‚ç‚¹</param>
-	/// <param name="indices">é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
-	Geometry (vector<shared_ptr<Vertex>> vertices, vector<shared_ptr<VertexIndex>> indices, com_ptr<VertexBuffer> vertexBuffer);
+	/// <param name="vertices">’¸“_</param>
+	/// <param name="indices">’¸“_ƒCƒ“ƒfƒbƒNƒX</param>
+	Geometry (vector<Vertex> vertices, vector<VertexIndex> indices);
 
 	/// <summary>
-	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãªã—)
+	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^(’¸“_ƒCƒ“ƒfƒbƒNƒX‚È‚µ)
 	/// </summary>
-	/// <param name="vertices">é ‚ç‚¹</param>
-	Geometry (vector<shared_ptr<Vertex>> vertices, com_ptr<VertexBuffer> vertexBuffer);
+	/// <param name="vertices">’¸“_</param>
+	Geometry (vector<Vertex> vertices);
 
 	/// <summary>
-	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// ƒfƒXƒgƒ‰ƒNƒ^
 	/// </summary>
 	~Geometry ();
 
 	/// <summary>
-	/// é ‚ç‚¹æ•°ã‚’å–å¾—ã™ã‚‹
+	/// ’¸“_”‚ğæ“¾‚·‚é
 	/// </summary>
-	/// <returns>å½¢çŠ¶ã®é ‚ç‚¹æ•°</returns>
+	/// <returns>Œ`ó‚Ì’¸“_”</returns>
 	int GetVertexNum ();
 
 	/// <summary>
-	/// é ‚ç‚¹æƒ…å ±ã‚’å–å¾—ã™ã‚‹
+	/// ’¸“_î•ñ‚ğæ“¾‚·‚é
 	/// </summary>
-	/// <returns>é ‚ç‚¹æƒ…å ±</returns>
-	vector<shared_ptr<Vertex>> GetVertices ();
+	/// <returns>’¸“_î•ñ</returns>
+	vector<Vertex> GetVertices ();
 
 	/// <summary>
-	/// é ‚ç‚¹æƒ…å ±é…åˆ—ã‚’å–å¾—ã™ã‚‹
+	/// ’¸“_î•ñ”z—ñ‚ğæ“¾‚·‚é
 	/// </summary>
-	/// <returns>é ‚ç‚¹æƒ…å ±é…åˆ—</returns>
-	shared_ptr<Vertex>* GetVertexArray ();
+	/// <returns>’¸“_î•ñ”z—ñ</returns>
+	shared_ptr<Vertex> GetVertexArray ();
+
+	/// <summary>
+	/// ’¸“_À•WŒQ‚©‚çŒ`ó‚ğ¶¬‚·‚é
+	/// </summary>
+	/// <param name="vertexPositions">’¸“_À•WŒQ</param>
+	/// <returns>Œ`ó</returns>
+	static Geometry CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPositions);
 
 private:
 	/// <summary>
-	/// é ‚ç‚¹
+	/// ’¸“_
 	/// </summary>
-	vector<shared_ptr<Vertex>> m_vertices;
+	vector<Vertex> m_vertices;
 
 	/// <summary>
-	/// é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+	/// ’¸“_ƒCƒ“ƒfƒbƒNƒX
 	/// </summary>
-	vector<shared_ptr<VertexIndex>> m_indices;
+	vector<VertexIndex> m_indices;
 
-	/// <summary>
-	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
-	/// </summary>
-	com_ptr<VertexBuffer> m_vertexBuffer;
 };

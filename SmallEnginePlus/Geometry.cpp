@@ -1,67 +1,65 @@
+#include "pch.h"
 #include "Geometry.h"
 
 /// <summary>
-/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚ã‚Š)
+/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^(’¸“_ƒCƒ“ƒfƒbƒNƒX‚ ‚è)
 /// </summary>
 /// <param name="triangles"></param>
-Geometry::Geometry (vector<shared_ptr<Vertex>> vertices, vector<shared_ptr<VertexIndex>> indices, com_ptr<VertexBuffer> vertexBuffer) {
+Geometry::Geometry (vector<Vertex> vertices, vector<VertexIndex> indices) {
 	m_vertices = std::move (vertices);
 	m_indices = std::move (indices);
-	m_vertexBuffer = vertexBuffer;
 }
 
 /// <summary>
-/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãªã—)
+/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^(’¸“_ƒCƒ“ƒfƒbƒNƒX‚È‚µ)
 /// </summary>
 /// <param name="triangles"></param>
-Geometry::Geometry (vector<shared_ptr<Vertex>> vertices, com_ptr<VertexBuffer> vertexBuffer) {
+Geometry::Geometry (vector<Vertex> vertices) {
 	this->m_vertices = std::move (vertices);
 
 	void* data;
 	CD3DX12_RANGE readRange (0, 0);
-
-	m_vertexBuffer = vertexBuffer;
-
-	m_vertexBuffer->Map (0, nullptr, &data);
-	memcpy (data, vertices.data (), vertices.size () * sizeof (Vertex));
-	m_vertexBuffer->Unmap (0, nullptr);
 }
 
 /// <summary>
-/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+/// ƒfƒXƒgƒ‰ƒNƒ^
 /// </summary>
 Geometry::~Geometry () {
 	for (const auto vertex : m_vertices) {
-		vertex->~Vertex ();
+		vertex.~Vertex ();
 	}
 
 	for (const auto index : m_indices) {
-		index->~VertexIndex ();
+		index.~VertexIndex ();
 	}
 
 	m_vertices.clear();
 }
 
 /// <summary>
-/// é ‚ç‚¹æƒ…å ±ã‚’å–å¾—ã™ã‚‹
+/// ’¸“_î•ñ‚ğæ“¾‚·‚é
 /// </summary>
-/// <returns>é ‚ç‚¹æƒ…å ±</returns>
-vector<shared_ptr<Vertex>> Geometry::GetVertices () {
+/// <returns>’¸“_î•ñ</returns>
+vector<Vertex> Geometry::GetVertices () {
 	return m_vertices;
 }
 
 /// <summary>
-/// é ‚ç‚¹æƒ…å ±é…åˆ—ã‚’å–å¾—ã™ã‚‹
+/// ’¸“_À•WŒQ‚©‚çŒ`ó‚ğ¶¬‚·‚é
 /// </summary>
-/// <returns>é ‚ç‚¹æƒ…å ±é…åˆ—</returns>
-shared_ptr<Vertex>* Geometry::GetVertexArray () {
-	return m_vertices.data ();
+/// <param name="vertexPositions">’¸“_À•WŒQ</param>
+/// <returns>Œ`ó</returns>
+Geometry Geometry::CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPositions)
+{
+	auto vertices = Vertex::CreateVerticesFromXMFloat3Array (vertexPositions);
+	return Geometry (vertices);
 }
 
+
 /// <summary>
-/// é ‚ç‚¹æ•°ã‚’å–å¾—ã™ã‚‹
+/// ’¸“_”‚ğæ“¾‚·‚é
 /// </summary>
-/// <returns>å½¢çŠ¶ã®é ‚ç‚¹æ•°</returns>
+/// <returns>Œ`ó‚Ì’¸“_”</returns>
 int Geometry::GetVertexNum () {
 	return this->m_vertices.size();
 }

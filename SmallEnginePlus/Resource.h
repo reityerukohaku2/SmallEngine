@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ã§ç”Ÿæˆã•ã‚ŒãŸã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«ã§ã™ã€‚
-// æ¬¡ã§ä½¿ç”¨: SmallEnginePlus.rc
+// Microsoft Visual C++ ‚Å¶¬‚³‚ê‚½ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹‚Å‚·B
+// ŽŸ‚ÅŽg—p: SmallEnginePlus.rc
 
 #define IDS_APP_TITLE			103
 
@@ -16,7 +16,7 @@
 #ifndef IDC_STATIC
 #define IDC_STATIC				-1
 #endif
-// æ–°ã—ã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¬¡ã®æ—¢å®šå€¤
+// V‚µ‚¢ƒIƒuƒWƒFƒNƒg‚ÌŽŸ‚ÌŠù’è’l
 //
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS

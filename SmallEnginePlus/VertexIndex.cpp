@@ -1,14 +1,15 @@
+#include "pch.h"
 #include "VertexIndex.h"
 
 /// <summary>
-/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 /// </summary>
-/// <param name="index">é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+/// <param name="index">’¸“_ƒCƒ“ƒfƒbƒNƒX</param>
 VertexIndex::VertexIndex (DWORD index) {
 	this->m_index = index;
 }
 
 /// <summary>
-/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+/// ƒfƒXƒgƒ‰ƒNƒ^
 /// </summary>
 VertexIndex::~VertexIndex (){}

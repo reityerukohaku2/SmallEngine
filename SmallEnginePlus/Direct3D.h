@@ -1,6 +1,6 @@
 #pragma once
-
-// Direct3Dã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ä½¿ç”¨ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+#include "pch.h"
+// Direct3D‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚ğg—p‚Å‚«‚é‚æ‚¤‚É‚·‚é
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"user32.lib") 
 #pragma comment(lib,"Gdi32.lib") 
@@ -9,172 +9,128 @@
 #pragma comment(lib,"d3dcompiler.lib")
 #pragma comment(lib,"winmm.lib") 
 
-#include <d3d12.h>
 #include "d3dx12.h"
-#include <dxgi1_4.h>
-#include <DirectXMath.h>
-#include <D3Dcompiler.h>
-#include <winrt/base.h>
-#include <winrt/Windows.Foundation.h>
-
-#include "Geometry.h"
+#include "GeometryCollection.h"
+#include "Renderer.h"
 
 using winrt::com_ptr;
 using namespace std;
 using namespace DirectX;
 
-#define kWindowWidth 1280		//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å¹…
-#define kWindowHeight 720		//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é«˜ã•
-#define kAppName "åˆæœŸåŒ–"
-#define kFrameCount 3			//ç”»é¢ãƒãƒƒãƒ•ã‚¡æ•°
+#define kWindowWidth 1280		//ƒEƒBƒ“ƒhƒE•
+#define kWindowHeight 720		//ƒEƒBƒ“ƒhƒE‚‚³
+#define kAppName "‰Šú‰»"
+#define kFrameCount 3			//‰æ–Êƒoƒbƒtƒ@”
 #define ARRAY_LENGTH(array) (sizeof(array) / sizeof(array[0]))
 
 //=========================================
-// Direct3Dã‚¯ãƒ©ã‚¹
+// Direct3DƒNƒ‰ƒX
 //=========================================
 class Direct3D
 {
 public:
+
 	/// <summary>
-	/// Direct3Dã‚’åˆæœŸåŒ–ã—ã€ä½¿ç”¨ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+	/// Direct3D‚ğ‰Šú‰»‚µAg—p‚Å‚«‚é‚æ‚¤‚É‚·‚é
 	/// </summary>
-	/// <param name="hWnd">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«</param>
-	/// <param name="width">ç”»é¢ã®å¹…</param>
-	/// <param name="height">ç”»é¢ã®é«˜ã•</param>
-	/// <returns>æˆåŠŸæ™‚ã«trueã€å¤±æ•—æ™‚ã«falseã‚’è¿”ã™</returns>
+	/// <param name="hWnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
+	/// <param name="width">‰æ–Ê‚Ì•</param>
+	/// <param name="height">‰æ–Ê‚Ì‚‚³</param>
+	/// <returns>¬Œ÷‚ÉtrueA¸”s‚Éfalse‚ğ•Ô‚·</returns>
 	bool Initialize(HWND hWnd);
 
 	/// <summary>
-	/// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚’è¡Œã†
+	/// ƒŒƒ“ƒ_ƒŠƒ“ƒO‚ğs‚¤
 	/// </summary>
 	void Render();
 
-	// ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³å®Ÿè£…ç”¨
+	// ƒVƒ“ƒOƒ‹ƒgƒ“À‘•—p
 	/// <summary>
-	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
+	/// ƒCƒ“ƒXƒ^ƒ“ƒX¶¬
 	/// </summary>
 	static void CreateInstance();
 
 	/// <summary>
-	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å‰Šé™¤
+	/// ƒCƒ“ƒXƒ^ƒ“ƒXíœ
 	/// </summary>
 	static void DeleteInstance();
 
 	/// <summary>
-	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å–å¾—
+	/// ƒCƒ“ƒXƒ^ƒ“ƒXæ“¾
 	/// </summary>
 	/// <returns></returns>
 	static Direct3D& GetInstance();
 
 	/// <summary>
-	/// ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–
+	/// ƒ‚ƒfƒ‹‚Ì‰Šú‰»
 	/// </summary>
-	/// <returns>æˆåŠŸã—ãŸã‚‰SUCCEEDED</returns>
+	/// <returns>¬Œ÷‚µ‚½‚çSUCCEEDED</returns>
 	HRESULT InitModels ();
 
 private:
 
-	//ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
-	struct Cbuffer
-	{
-		XMMATRIX wvp;
-		Cbuffer ()
-		{
-			ZeroMemory (this, sizeof (Cbuffer));
-		}
-	};
-
+	Renderer m_renderer;
 
 	/// <summary>
-	/// ãƒ‡ãƒãƒƒã‚°ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©
+	/// ƒfƒoƒbƒOƒRƒ“ƒgƒ[ƒ‰
 	/// </summary>
 	com_ptr<ID3D12Debug>					debugController;
 
 	/// <summary>
-	/// Direct3Dãƒ‡ãƒã‚¤ã‚¹
-	/// </summary>
-	com_ptr<ID3D12Device>				m_device;
-
-	/// <summary>
-	/// ã‚³ãƒãƒ³ãƒ‰ã‚¢ãƒ­ã‚±ãƒ¼ã‚¿ãƒ¼
+	/// ƒRƒ}ƒ“ƒhƒAƒƒP[ƒ^[
 	/// </summary>
 	com_ptr<ID3D12CommandAllocator>		m_commandAllocator;
 
-	/// <summary>
-	/// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ
-	/// </summary>
-	com_ptr<ID3D12GraphicsCommandList>	m_commandList;
+
 
 	/// <summary>
-	/// ã‚³ãƒãƒ³ãƒ‰ã‚­ãƒ¥ãƒ¼
+	/// ƒRƒ}ƒ“ƒhƒLƒ…[
 	/// </summary>
 	com_ptr<ID3D12CommandQueue>			m_commandQueue;
 
 	/// <summary>
-	/// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³
+	/// ƒXƒƒbƒvƒ`ƒFƒCƒ“
 	/// </summary>
 	com_ptr<IDXGISwapChain3>				m_swapChain;
 
 	/// <summary>
-	/// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼
+	/// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[
 	/// </summary>
 	com_ptr <ID3D12Resource>				m_renderTargets[kFrameCount];
 	com_ptr <ID3D12DescriptorHeap>		m_rtvHeap;
 
-	/// <summary>
-	/// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
-	/// </summary>
-	com_ptr <ID3D12Resource> m_constantBuffer;
-	com_ptr <ID3D12DescriptorHeap> m_descHeap;
+
 
 	/// <summary>
-	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+	/// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[
 	/// </summary>
-	com_ptr <ID3D12Resource>				m_vertexBuffer;
 	D3D12_VERTEX_BUFFER_VIEW			m_vertexBufferView;
 
 	/// <summary>
-	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+	/// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
 	/// </summary>
 	com_ptr <ID3D12Resource>				m_indexBuffer;
 	D3D12_INDEX_BUFFER_VIEW				m_indexBufferView;
 
-	/// <summary>
-	/// ãƒ•ã‚§ãƒ³ã‚¹
-	/// </summary>
-	com_ptr<ID3D12Fence>					m_fence;
-
-	/// <summary>
-	/// ãƒ•ã‚§ãƒ³ã‚¹å€¤ã‚’æ ¼ç´ã™ã‚‹å ´æ‰€
-	/// </summary>
-	UINT64	m_fenceValue;
-
-	/// <summary>
-	/// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£
-	/// </summary>
-	com_ptr <ID3D12RootSignature>		m_rootSignature;
 		
 	/// <summary>
-	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg
 	/// </summary>
 	com_ptr <ID3D12PipelineState>		m_pipelineState;
 
+	GeometryCollection m_geometries;
 
-	// å”¯ä¸€ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”¨ã®ãƒã‚¤ãƒ³ã‚¿
+	// —Bˆê‚ÌƒCƒ“ƒXƒ^ƒ“ƒX—p‚Ìƒ|ƒCƒ“ƒ^
 	static inline Direct3D* s_instance;
 
-	Direct3D() {}
+	Direct3D(){}
 
 	/// <summary>
-	/// GPUã®å‡¦ç†ãŒå®Œäº†ã™ã‚‹ã¾ã§å¾…ã¤
-	/// </summary>
-	void WaitGpu();
-
-	/// <summary>
-	/// ãƒ¡ãƒ¢ãƒªé ˜åŸŸã®é–‹æ”¾
+	/// ƒƒ‚ƒŠ—Ìˆæ‚ÌŠJ•ú
 	/// </summary>
 	void DestroyD3D ();
 };
 
-// Direct3Dã®å”¯ä¸€ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç°¡å˜ã«å–å¾—ã™ã‚‹ãŸã‚ã®ãƒã‚¯ãƒ­
+// 
+// ‚Ì—Bˆê‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğŠÈ’P‚Éæ“¾‚·‚é‚½‚ß‚Ìƒ}ƒNƒ
 #define D3D Direct3D::GetInstance()
