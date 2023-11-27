@@ -225,7 +225,11 @@ void Renderer::CreateRenderTarget()
 	rtvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 	m_device->CreateDescriptorHeap (&rtvHeapDesc, IID_PPV_ARGS (&m_rtvHeap));
 
-	//レンダーターゲットビュー作成
+	// レンダーターゲットの領域確保
+	m_renderTargets.reserve (kFrameCount);
+	m_renderTargets.resize (kFrameCount);
+
+	// レンダーターゲットビュー作成
 	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle (m_rtvHeap->GetCPUDescriptorHandleForHeapStart ());
 	for (UINT n = 0; n < kFrameCount; n++)
 	{
