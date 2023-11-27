@@ -5,7 +5,7 @@
 /// コンストラクタ(頂点インデックスあり)
 /// </summary>
 /// <param name="triangles"></param>
-Geometry::Geometry (vector<Vertex> vertices, vector<VertexIndex> indices) {
+Geometry::Geometry (VertexCollection vertices, vector<VertexIndex> indices) {
 	m_vertices = std::move (vertices);
 	m_indices = std::move (indices);
 }
@@ -14,7 +14,7 @@ Geometry::Geometry (vector<Vertex> vertices, vector<VertexIndex> indices) {
 /// コンストラクタ(頂点インデックスなし)
 /// </summary>
 /// <param name="triangles"></param>
-Geometry::Geometry (vector<Vertex> vertices) {
+Geometry::Geometry (VertexCollection vertices) {
 	this->m_vertices = std::move (vertices);
 
 	void* data;
@@ -40,7 +40,7 @@ Geometry::~Geometry () {
 /// 頂点情報を取得する
 /// </summary>
 /// <returns>頂点情報</returns>
-vector<Vertex> Geometry::GetVertices () {
+VertexCollection Geometry::GetVertices () {
 	return m_vertices;
 }
 

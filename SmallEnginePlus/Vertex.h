@@ -23,6 +23,12 @@ public:
 	~Vertex ();
 
 	/// <summary>
+	/// 頂点座標を返す
+	/// </summary>
+	/// <returns>頂点座標</returns>
+	XMFLOAT3 GetXMFLOATPosition();
+
+	/// <summary>
 	/// 複数の頂点座標から頂点情報の配列を生成する
 	/// </summary>
 	/// <param name="positions">頂点座標群</param>

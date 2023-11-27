@@ -14,10 +14,14 @@ com_ptr<VertexBuffer> ResourceFactory::CreateVertexBufferByGeometries (com_ptr<I
 	auto vertexBuffer = VertexBuffer::GetInstance (device, vertexBufferSize);
 
 	// 頂点バッファに頂点情報をMapする
-	unique_ptr<UINT8> pVertexDataBegin;
+	shared_ptr <UINT8> pVertexDataBegin;
 	CD3DX12_RANGE readRange (0, 0);
 	vertexBuffer->Map (0, &readRange, reinterpret_cast<void**>(&pVertexDataBegin));
-	memcpy (pVertexDataBegin.get(), geometries.GetVertices().data(), sizeof (vertexBufferSize));
+
+	// 頂点配列からプリミティブな座標の配列を生成
+	auto p_positions = geometries.GetVertices ().GetArrayOfXMFLOAT3Position().data();
+
+	memcpy (pVertexDataBegin.get(), p_positions, sizeof (vertexBufferSize));
 	vertexBuffer->Unmap (0, NULL);
 
 	return vertexBuffer;

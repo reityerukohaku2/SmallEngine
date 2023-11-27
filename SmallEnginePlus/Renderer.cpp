@@ -93,7 +93,7 @@ void Renderer::Render ()
 	m_commandList->RSSetScissorRects (1, &scissorRect);
 
 	//画面クリア
-	const float clearColor[] = { 0.0f, 0.0f, 0.5f, 1.0f };
+	const float clearColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	m_commandList->ClearRenderTargetView (rtvHandle, clearColor, 0, NULL);
 
 	//ルートシグネチャをセット
@@ -124,7 +124,7 @@ void Renderer::Render ()
 
 	//描画
 	static float r = 0;
-	r += 0.05;
+	r += 0.05f;
 	rotMat = XMMatrixRotationZ (r);//単純にyaw回転させる
 
 	//コンスタントバッファの内容を更新

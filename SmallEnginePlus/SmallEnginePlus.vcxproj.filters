@@ -31,6 +31,12 @@
     <Filter Include="ソース ファイル\Resources">
       <UniqueIdentifier>{4c83b776-44cf-4169-86ad-2d7a8adfb022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Common">
+      <UniqueIdentifier>{fbff57b6-9c03-43e2-b4b9-802136610c27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Common">
+      <UniqueIdentifier>{11221e01-d7ed-4f51-8456-6d9bf1d5aba5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -72,6 +78,12 @@
     <ClInclude Include="GeometryCollection.h">
       <Filter>ヘッダー ファイル\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="ICollection.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexCollection.h">
+      <Filter>ヘッダー ファイル\Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SmallEnginePlus.cpp">
@@ -99,6 +111,12 @@
       <Filter>ソース ファイル\Resources</Filter>
     </ClCompile>
     <ClCompile Include="GeometryCollection.cpp">
+      <Filter>ソース ファイル\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="ICollection.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexCollection.cpp">
       <Filter>ソース ファイル\Geometry</Filter>
     </ClCompile>
   </ItemGroup>

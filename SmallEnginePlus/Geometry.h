@@ -3,6 +3,7 @@
 #include "Vertex.h"
 #include "VertexIndex.h"
 #include "VertexBuffer.h"
+#include "VertexCollection.h"
 
 using namespace std;
 using winrt::com_ptr;
@@ -18,13 +19,13 @@ public:
 	/// </summary>
 	/// <param name="vertices">頂点</param>
 	/// <param name="indices">頂点インデックス</param>
-	Geometry (vector<Vertex> vertices, vector<VertexIndex> indices);
+	Geometry (VertexCollection vertices, vector<VertexIndex> indices);
 
 	/// <summary>
 	/// コンストラクタ(頂点インデックスなし)
 	/// </summary>
 	/// <param name="vertices">頂点</param>
-	Geometry (vector<Vertex> vertices);
+	Geometry (VertexCollection vertices);
 
 	/// <summary>
 	/// デストラクタ
@@ -41,7 +42,7 @@ public:
 	/// 頂点情報を取得する
 	/// </summary>
 	/// <returns>頂点情報</returns>
-	vector<Vertex> GetVertices ();
+	VertexCollection GetVertices ();
 
 	/// <summary>
 	/// 頂点情報配列を取得する
@@ -60,7 +61,7 @@ private:
 	/// <summary>
 	/// 頂点
 	/// </summary>
-	vector<Vertex> m_vertices;
+	VertexCollection m_vertices;
 
 	/// <summary>
 	/// 頂点インデックス
