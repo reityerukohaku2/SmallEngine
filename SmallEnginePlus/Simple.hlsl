@@ -3,7 +3,7 @@ cbuffer SceneConstantBuffer : register(b0)
 	float4x4 g_wvp;
 };
 //
-//ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+//ƒo[ƒeƒbƒNƒXƒVƒF[ƒ_[
 //
 float4 VS(float4 Pos : POSITION) : SV_POSITION
 {
@@ -12,7 +12,7 @@ float4 VS(float4 Pos : POSITION) : SV_POSITION
 	return pos;
 }
 //
-//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+//ƒsƒNƒZƒ‹ƒVƒF[ƒ_[
 //
 float4 PS(float4 Pos : SV_POSITION) : SV_Target
 {

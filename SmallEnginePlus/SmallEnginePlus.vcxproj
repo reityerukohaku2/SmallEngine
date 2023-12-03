@@ -24,7 +24,6 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{7ad1409c-b3ef-4e8a-be6c-7fdce9a4c8a7}</ProjectGuid>
     <RootNamespace>SmallEnginePlus</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <CppWinRTProjectLanguage>C++/WinRT</CppWinRTProjectLanguage>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -79,7 +78,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/bigobj /await %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -118,7 +116,6 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalOptions>/bigobj /await %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>C:\Users\fujimoto.rei22\repos\SmallEngine\SmallEnginePlus\x64\Debug\Generated Files\winrt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAsWinRT>false</CompileAsWinRT>

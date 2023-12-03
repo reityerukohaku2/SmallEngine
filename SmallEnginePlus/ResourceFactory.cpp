@@ -19,9 +19,9 @@ com_ptr<VertexBuffer> ResourceFactory::CreateVertexBufferByGeometries (com_ptr<I
 	vertexBuffer->Map (0, &readRange, reinterpret_cast<void**>(&pVertexDataBegin));
 
 	// 頂点配列からプリミティブな座標の配列を生成
-	auto p_positions = geometries.GetVertices ().GetArrayOfXMFLOAT3Position().data();
+	auto vertices = geometries.GetVertices ();
 
-	memcpy (pVertexDataBegin.get(), p_positions, sizeof (vertexBufferSize));
+	memcpy (pVertexDataBegin.get(), vertices.data(), sizeof (vertices));
 	vertexBuffer->Unmap (0, NULL);
 
 	return vertexBuffer;

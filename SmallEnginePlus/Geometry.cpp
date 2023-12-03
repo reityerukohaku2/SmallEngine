@@ -51,7 +51,7 @@ VertexCollection Geometry::GetVertices () {
 /// <returns>å`èÛ</returns>
 Geometry Geometry::CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPositions)
 {
-	auto vertices = Vertex::CreateVerticesFromXMFloat3Array (vertexPositions);
+	auto vertices = Vertex::CreateVerticesFromXMFLOAT3Array (vertexPositions);
 	return Geometry (vertices);
 }
 

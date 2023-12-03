@@ -64,8 +64,11 @@ vector<XMFLOAT3> VertexCollection::GetArrayOfXMFLOAT3Position ()
     vector<XMFLOAT3> positions;
 
     for (auto vertex:m_vertices) {
-        positions.push_back (vertex.GetXMFLOATPosition());
+        auto vectorPos = vertex.GetXMVECTORPosition();
+        shared_ptr<XMFLOAT3> float3Pos = make_shared<XMFLOAT3>();
+        XMStoreFloat3(float3Pos.get(), vectorPos);
+        positions.push_back (*float3Pos);
     }
 
-    return vector<XMFLOAT3> ();
+    return positions;
 }

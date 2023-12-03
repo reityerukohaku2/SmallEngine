@@ -5,7 +5,7 @@
 /// コンストラクタ
 /// </summary>
 /// <param name="pos">頂点位置</param>
-Vertex::Vertex (XMFLOAT3 pos) {
+Vertex::Vertex (XMVECTOR pos) {
 	this->m_pos = pos;
 }
 
@@ -18,7 +18,7 @@ Vertex::~Vertex () {}
 /// 頂点座標を返す
 /// </summary>
 /// <returns>頂点座標</returns>
-XMFLOAT3 Vertex::GetXMFLOATPosition ()
+XMVECTOR Vertex::GetXMVECTORPosition ()
 {
 	return m_pos;
 }
@@ -28,14 +28,15 @@ XMFLOAT3 Vertex::GetXMFLOATPosition ()
 /// </summary>
 /// <param name="positions">頂点座標群</param>
 /// <returns>頂点情報の配列</returns>
-vector<Vertex> Vertex::CreateVerticesFromXMFloat3Array (vector<XMFLOAT3> positions) {
+vector<Vertex> Vertex::CreateVerticesFromXMFLOAT3Array (vector<XMFLOAT3> positions) {
 	vector<Vertex> vertexArray = {};
 
 	// positionsからpositionを取り出し、Vertexオブジェクトを生成
 	for (const auto position : positions) {
-		Vertex vertex = Vertex (position);
+		XMVECTOR vectorPos = XMLoadFloat3(&position);
+		Vertex vertex = Vertex (vectorPos);
 
-		// VertexオブジェクトのスマートポインタをvertexArrayに格納していく
+		// VertexオブジェクトをvertexArrayに格納していく
 		vertexArray.push_back (vertex);
 	}
 
