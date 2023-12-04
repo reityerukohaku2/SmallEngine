@@ -43,6 +43,20 @@ public:
 	typename vector<Geometry>::const_iterator end ();
 
 	/// <summary>
+	/// targetPosの位置に配列を挿入する
+	/// </summary>
+	/// <param name="targetPos">挿入先</param>
+	/// <param name="begin">挿入する配列の開始地点</param>
+	/// <param name="end">挿入する配列の終了地点</param>
+	/// <returns></returns>
+	typename vector<Geometry>::const_iterator insert 
+	(
+		typename vector<Geometry>::const_iterator targetPos, 
+		typename vector<Geometry>::const_iterator begin, 
+		typename vector<Geometry>::const_iterator end
+	);
+
+	/// <summary>
 	/// 配列の要素数を返す
 	/// </summary>
 	/// <returns></returns>
@@ -71,6 +85,17 @@ public:
 	VertexCollection GetVertices ();
 
 private:
+	/// <summary>
+	/// 頂点数再計算用関数
+	/// </summary>
+	/// <returns>全頂点数</returns>
+	UINT CountVertexNum ();
+
 	vector<Geometry> m_geometries;
+
+	/// <summary>
+	/// 全頂点数
+	/// </summary>
+	UINT m_vertexNum;
 };
 

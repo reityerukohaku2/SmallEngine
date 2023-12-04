@@ -8,6 +8,7 @@
 GeometryCollection::GeometryCollection (vector<Geometry> geometries)
 {
     m_geometries = geometries;
+    m_vertexNum = CountVertexNum ();
 }
 
 /// <summary>
@@ -17,6 +18,7 @@ GeometryCollection::GeometryCollection (vector<Geometry> geometries)
 void GeometryCollection::push_back (Geometry geometry)
 {
     m_geometries.push_back (geometry);
+    m_vertexNum = CountVertexNum ();
 }
 
 /// <summary>
@@ -46,12 +48,7 @@ typename vector<Geometry>::const_iterator GeometryCollection::begin ()
 /// <returns></returns>
 UINT GeometryCollection::GetVertexNum ()
 {
-    UINT vertexNum = 0;
-    for (auto geometry: m_geometries) {
-        vertexNum += geometry.GetVertexNum ();
-    }
-
-    return vertexNum;
+    return m_vertexNum;
 }
 
 /// <summary>
@@ -68,13 +65,47 @@ UINT GeometryCollection::GetGeometriesSize ()
 /// </summary>
 VertexCollection GeometryCollection::GetVertices ()
 {
-    vector<Vertex> allVertices;
+    VertexCollection allVertices;
+    vector<Vertex> hoge, hoge2;
+
     for (auto geometry : m_geometries) {
         auto vertices = geometry.GetVertices ();
-        copy (vertices.begin (), vertices.end (), back_inserter (allVertices));
+
+        // 末尾に配列を追加
+        allVertices.insert (allVertices.end(), vertices.begin(), vertices.end());
     }
 
     return allVertices;
+}
+
+/// <summary>
+/// 頂点数を再計算する
+/// </summary>
+/// <returns>全頂点数</returns>
+UINT GeometryCollection::CountVertexNum ()
+{
+    UINT vertexNum = 0;
+    for (auto geometry : m_geometries) {
+        vertexNum += geometry.GetVertexNum ();
+    }
+
+    return vertexNum;
+}
+
+/// <summary>
+/// targetPosの位置に配列を挿入する
+/// </summary>
+/// <param name="targetPos">挿入先</param>
+/// <param name="begin">挿入する配列の開始地点</param>
+/// <param name="end">挿入する配列の終了地点</param>
+/// <returns></returns>
+typename vector<Geometry>::const_iterator GeometryCollection::insert 
+(
+    typename vector<Geometry>::const_iterator targetPos, 
+    typename vector<Geometry>::const_iterator begin, 
+    typename vector<Geometry>::const_iterator end
+){
+    return m_geometries.insert (targetPos, begin, end);
 }
 
 /// <summary>
@@ -92,5 +123,6 @@ size_t GeometryCollection::size ()
 void GeometryCollection::clear ()
 {
     m_geometries.clear ();
+    m_vertexNum = 0;
 }
 

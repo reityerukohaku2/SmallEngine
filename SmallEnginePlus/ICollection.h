@@ -11,6 +11,7 @@ public:
 	virtual T* data () = 0;
 	virtual iterator begin () = 0;
 	virtual iterator end () = 0;
+	virtual iterator insert (iterator target, iterator begin, iterator end) = 0;
 	virtual void clear () = 0;
 	virtual size_t size () = 0;
 };

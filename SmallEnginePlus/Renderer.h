@@ -132,5 +132,9 @@ private:
 	ID3DBlob* vertexShader;
 	ID3DBlob* pixelShader;
 
+	/// <summary>
+	/// 描画する形状のコレクション
+	/// </summary>
+	GeometryCollection m_geometries;
 };
 
