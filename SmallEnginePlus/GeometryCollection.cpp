@@ -9,6 +9,7 @@ GeometryCollection::GeometryCollection (vector<Geometry> geometries)
 {
     m_geometries = geometries;
     m_vertexNum = CountVertexNum ();
+    m_indexNum = CountIndexNum ();
 }
 
 /// <summary>
@@ -18,7 +19,8 @@ GeometryCollection::GeometryCollection (vector<Geometry> geometries)
 void GeometryCollection::push_back (Geometry geometry)
 {
     m_geometries.push_back (geometry);
-    m_vertexNum = CountVertexNum ();
+    m_vertexNum++;
+    m_indexNum++;
 }
 
 /// <summary>
@@ -52,12 +54,30 @@ UINT GeometryCollection::GetVertexNum ()
 }
 
 /// <summary>
+/// 形状に含まれる全ての頂点インデックス数を返す
+/// </summary>
+/// <returns></returns>
+UINT GeometryCollection::GetIndexNum ()
+{
+    return m_indexNum;
+}
+
+/// <summary>
 /// 形状のバイト数を返す
 /// </summary>
 /// <returns></returns>
 UINT GeometryCollection::GetGeometriesSize ()
 {
-    return this->GetVertexNum () * sizeof(Vertex);
+    return GetVertexNum () * sizeof(Vertex);
+}
+
+/// <summary>
+/// 頂点インデックスのバイト数を返す
+/// </summary>
+/// <returns>頂点インデックスのバイト数</returns>
+UINT GeometryCollection::GetIndiceSize () 
+{
+    return GetIndexNum () * sizeof (VertexIndex);
 }
 
 /// <summary>
@@ -90,6 +110,20 @@ UINT GeometryCollection::CountVertexNum ()
     }
 
     return vertexNum;
+}
+
+/// <summary>
+/// 頂点インデックス数を再計算する
+/// </summary>
+/// <returns>全頂点インデックス数</returns>
+UINT GeometryCollection::CountIndexNum ()
+{
+    UINT indexNum = 0;
+    for (auto geometry : m_geometries) {
+        indexNum += geometry.GetIndexNum ();
+    }
+
+    return indexNum;
 }
 
 /// <summary>

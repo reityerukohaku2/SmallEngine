@@ -84,6 +84,18 @@ public:
 	/// </summary>
 	VertexCollection GetVertices ();
 
+	/// <summary>
+	/// 頂点インデックスのバイト数を返す
+	/// </summary>
+	/// <returns>頂点インデックスのバイト数</returns>
+	UINT GetIndiceSize ();
+
+	/// <summary>
+	/// 頂点インデックスの数を返す
+	/// </summary>
+	/// <returns>頂点インデックスの数</returns>
+	UINT GetIndexNum ();
+
 private:
 	/// <summary>
 	/// 頂点数再計算用関数
@@ -91,11 +103,25 @@ private:
 	/// <returns>全頂点数</returns>
 	UINT CountVertexNum ();
 
+	/// <summary>
+	/// 頂点インデックス数再計算用関数
+	/// </summary>
+	/// <returns>全頂点インデックス数</returns>
+	UINT CountIndexNum ();
+
+	/// <summary>
+	/// 形状の配列
+	/// </summary>
 	vector<Geometry> m_geometries;
 
 	/// <summary>
 	/// 全頂点数
 	/// </summary>
 	UINT m_vertexNum;
+
+	/// <summary>
+	/// 頂点インデックス数
+	/// </summary>
+	UINT m_indexNum;
 };
 

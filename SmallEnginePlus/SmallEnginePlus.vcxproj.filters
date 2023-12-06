@@ -84,6 +84,9 @@
     <ClInclude Include="VertexCollection.h">
       <Filter>ヘッダー ファイル\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>ヘッダー ファイル\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SmallEnginePlus.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="VertexCollection.cpp">
       <Filter>ソース ファイル\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>ソース ファイル\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

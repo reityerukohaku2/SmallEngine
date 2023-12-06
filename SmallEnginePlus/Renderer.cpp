@@ -63,6 +63,9 @@ Renderer::Renderer (GeometryCollection geometries, HWND hWnd)
 	m_vertexBufferView.BufferLocation = m_vertexBuffer->GetGPUVirtualAddress();
 	m_vertexBufferView.SizeInBytes = m_geometries.GetGeometriesSize ();
 	m_vertexBufferView.StrideInBytes = sizeof(Vertex);
+
+	// インデックスバッファの作成
+	m_indexBuffer = ResourceFactory::CreateIndexBufferByGeometries (m_device, m_geometries);
 }
 
 Renderer::Renderer(){}

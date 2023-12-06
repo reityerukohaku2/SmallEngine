@@ -55,11 +55,25 @@ Geometry Geometry::CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPosit
 	return Geometry (vertices);
 }
 
+Geometry Geometry::CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indice)
+{
+
+}
+
 
 /// <summary>
 /// 頂点数を取得する
 /// </summary>
 /// <returns>形状の頂点数</returns>
 int Geometry::GetVertexNum () {
-	return this->m_vertices.size();
+	return m_vertices.size();
+}
+
+/// <summary>
+/// 頂点インデックス数を取得する
+/// </summary>
+/// <returns>形状の頂点インデックス数</returns>
+int Geometry::GetIndexNum ()
+{
+	return m_indices.size();
 }

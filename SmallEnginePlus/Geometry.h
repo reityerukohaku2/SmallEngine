@@ -39,6 +39,12 @@ public:
 	int GetVertexNum ();
 
 	/// <summary>
+	/// 頂点インデックス数を取得する
+	/// </summary>
+	/// <returns>形状の頂点インデックス数</returns>
+	int GetIndexNum ();
+
+	/// <summary>
 	/// 頂点情報を取得する
 	/// </summary>
 	/// <returns>頂点情報</returns>
@@ -56,6 +62,22 @@ public:
 	/// <param name="vertexPositions">頂点座標群</param>
 	/// <returns>形状</returns>
 	static Geometry CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPositions);
+
+	/// <summary>
+	/// 頂点座標群と頂点インデックスから形状を生成する
+	/// </summary>
+	/// <param name="vertexPositions">頂点座標</param>
+	/// <param name="indice">頂点インデックス</param>
+	/// <returns>形状</returns>
+	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indice);
+
+	/// <summary>
+	/// 頂点座標群と頂点インデックスから形状を生成する
+	/// </summary>
+	/// <param name="vertexPositions">頂点座標</param>
+	/// <param name="indice">頂点インデックス</param>
+	/// <returns>形状</returns>
+	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<VertexIndex> indice);
 
 private:
 	/// <summary>
