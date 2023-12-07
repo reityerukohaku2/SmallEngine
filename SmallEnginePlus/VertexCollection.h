@@ -6,7 +6,7 @@
 /// <summary>
 /// Vertex‚Ì”z—ñ
 /// </summary>
-class VertexCollection: public ICollection<Vertex>
+class VertexCollection: public ICollection<class Vertex>
 {
 public:
 	VertexCollection () {};

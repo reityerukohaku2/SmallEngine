@@ -75,7 +75,7 @@ UINT GeometryCollection::GetGeometriesSize ()
 /// 頂点インデックスのバイト数を返す
 /// </summary>
 /// <returns>頂点インデックスのバイト数</returns>
-UINT GeometryCollection::GetIndiceSize () 
+UINT GeometryCollection::GetIndicesSize () 
 {
     return GetIndexNum () * sizeof (VertexIndex);
 }

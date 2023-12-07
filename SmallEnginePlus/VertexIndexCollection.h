@@ -3,7 +3,7 @@
 #include "ICollection.h"
 #include "VertexIndex.h"
 
-class VertexIndexCollection : public ICollection<VertexIndex>
+class VertexIndexCollection : public ICollection<class VertexIndex>
 {
 public:
 	VertexIndexCollection () {};
@@ -12,7 +12,7 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="geometries">VertexIndexの配列</param>
-	VertexIndexCollection (vector<VertexIndex> indice);
+	VertexIndexCollection (vector<VertexIndex> indices);
 
 	/// <summary>
 	/// 配列の末尾に要素を追加する
@@ -67,8 +67,6 @@ private:
 	/// <summary>
 	/// 形状の配列
 	/// </summary>
-	vector<VertexIndex> m_indice;
-
-	// TODO: このクラス完成させる
+	vector<VertexIndex> m_indices;
 };
 

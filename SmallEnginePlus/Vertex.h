@@ -1,9 +1,6 @@
 #pragma once
 #include "pch.h"
-using namespace DirectX;
-using namespace std;
-using winrt::com_ptr;
-using std::shared_ptr;
+#include "VertexCollection.h"
 
 /// <summary>
 /// 頂点情報を持つクラス
@@ -33,7 +30,7 @@ public:
 	/// </summary>
 	/// <param name="positions">頂点座標群</param>
 	/// <returns>頂点情報の配列</returns>
-	static vector<Vertex> CreateVerticesFromXMFLOAT3Array (vector<XMFLOAT3> positions);
+	static class VertexCollection CreateVerticesFromXMFLOAT3Array (vector<XMFLOAT3> positions);
 private:
 	/// <summary>
 	/// 頂点座標

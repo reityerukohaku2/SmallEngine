@@ -4,6 +4,7 @@
 #include "VertexIndex.h"
 #include "VertexBuffer.h"
 #include "VertexCollection.h"
+#include "VertexIndexCollection.h"
 
 using namespace std;
 using winrt::com_ptr;
@@ -19,7 +20,7 @@ public:
 	/// </summary>
 	/// <param name="vertices">頂点</param>
 	/// <param name="indices">頂点インデックス</param>
-	Geometry (VertexCollection vertices, vector<VertexIndex> indices);
+	Geometry (VertexCollection vertices, VertexIndexCollection indices);
 
 	/// <summary>
 	/// コンストラクタ(頂点インデックスなし)
@@ -69,7 +70,7 @@ public:
 	/// <param name="vertexPositions">頂点座標</param>
 	/// <param name="indice">頂点インデックス</param>
 	/// <returns>形状</returns>
-	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indice);
+	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indices);
 
 	/// <summary>
 	/// 頂点座標群と頂点インデックスから形状を生成する
@@ -77,7 +78,7 @@ public:
 	/// <param name="vertexPositions">頂点座標</param>
 	/// <param name="indice">頂点インデックス</param>
 	/// <returns>形状</returns>
-	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<VertexIndex> indice);
+	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, VertexIndexCollection indices);
 
 private:
 	/// <summary>
@@ -88,6 +89,6 @@ private:
 	/// <summary>
 	/// 頂点インデックス
 	/// </summary>
-	vector<VertexIndex> m_indices;
+	VertexIndexCollection m_indices;
 
 };

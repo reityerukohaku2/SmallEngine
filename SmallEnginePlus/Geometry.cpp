@@ -5,7 +5,7 @@
 /// コンストラクタ(頂点インデックスあり)
 /// </summary>
 /// <param name="triangles"></param>
-Geometry::Geometry (VertexCollection vertices, vector<VertexIndex> indices) {
+Geometry::Geometry (VertexCollection vertices, VertexIndexCollection indices) {
 	m_vertices = std::move (vertices);
 	m_indices = std::move (indices);
 }
@@ -15,10 +15,7 @@ Geometry::Geometry (VertexCollection vertices, vector<VertexIndex> indices) {
 /// </summary>
 /// <param name="triangles"></param>
 Geometry::Geometry (VertexCollection vertices) {
-	this->m_vertices = std::move (vertices);
-
-	void* data;
-	CD3DX12_RANGE readRange (0, 0);
+	m_vertices = std::move (vertices);
 }
 
 /// <summary>
@@ -55,9 +52,12 @@ Geometry Geometry::CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPosit
 	return Geometry (vertices);
 }
 
-Geometry Geometry::CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indice)
+Geometry Geometry::CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indicesData)
 {
+	auto vertices = Vertex::CreateVerticesFromXMFLOAT3Array (vertexPositions);
+	auto indices = VertexIndex::CreateIndicesFromDWORDArray (indicesData);
 
+	return Geometry (vertices, indices);
 }
 
 

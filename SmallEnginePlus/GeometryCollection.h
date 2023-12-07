@@ -7,7 +7,7 @@
 /// <summary>
 /// Geometryの配列
 /// </summary>
-class GeometryCollection : public ICollection<Geometry>
+class GeometryCollection : public ICollection<class Geometry>
 {
 public:
 	GeometryCollection () {};
@@ -88,7 +88,7 @@ public:
 	/// 頂点インデックスのバイト数を返す
 	/// </summary>
 	/// <returns>頂点インデックスのバイト数</returns>
-	UINT GetIndiceSize ();
+	UINT GetIndicesSize ();
 
 	/// <summary>
 	/// 頂点インデックスの数を返す

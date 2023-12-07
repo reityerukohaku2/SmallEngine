@@ -66,6 +66,11 @@ Renderer::Renderer (GeometryCollection geometries, HWND hWnd)
 
 	// インデックスバッファの作成
 	m_indexBuffer = ResourceFactory::CreateIndexBufferByGeometries (m_device, m_geometries);
+
+	// インデックスバッファビューの作成
+	m_indexBufferView.BufferLocation = m_indexBuffer->GetGPUVirtualAddress ();
+	m_indexBufferView.Format = DXGI_FORMAT_R32_UINT;
+	m_indexBufferView.SizeInBytes = m_geometries.GetIndicesSize();
 }
 
 Renderer::Renderer(){}
@@ -133,6 +138,8 @@ void Renderer::Render ()
 
 	//バーテックスバッファをセット
 	m_commandList->IASetVertexBuffers (0, 1, &m_vertexBufferView);
+	//インデックスバッファをセット
+	m_commandList->IASetIndexBuffer (&m_indexBufferView);
 
 	// 回転
 	static float r = 0;
@@ -158,7 +165,7 @@ void Renderer::Render ()
 
 	//描画
 	auto instanceCount = m_geometries.GetVertexNum () / 3;
-	m_commandList->DrawInstanced (6, instanceCount, 0, 0);
+	m_commandList->DrawIndexedInstanced (6, instanceCount, 0, 0, 0);
 
 	//バックバッファのトランジションをPresentモードにする
 	resource_barrier = CD3DX12_RESOURCE_BARRIER::Transition (m_renderTargets[backBufferIndex].get (), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);

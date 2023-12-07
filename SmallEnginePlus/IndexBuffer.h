@@ -29,6 +29,11 @@ public:
 	/// <returns>インデックスバッファインスタンス</returns>
 	static com_ptr<IndexBuffer> GetInstance (com_ptr<ID3D12Device> device, UINT indexBufferSize);
 
+	/// <summary>
+	/// インデックスバッファの大きさを返す
+	/// </summary>
+	/// <returns></returns>
+	UINT GetIndexBufferSize ();
 
 	// ******************************************
 	// ID3D12Resourceの純粋仮想関数

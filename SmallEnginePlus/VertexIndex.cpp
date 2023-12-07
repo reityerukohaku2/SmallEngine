@@ -13,3 +13,19 @@ VertexIndex::VertexIndex (DWORD index) {
 /// デストラクタ
 /// </summary>
 VertexIndex::~VertexIndex (){}
+
+/// <summary>
+/// DWORDの配列から頂点インデックスを作成する
+/// </summary>
+/// <param name="indicesData"></param>
+/// <returns></returns>
+VertexIndexCollection VertexIndex::CreateIndicesFromDWORDArray (vector<DWORD> indicesData)
+{
+	VertexIndexCollection indices;
+
+	for (auto index : indicesData) {
+		indices.push_back (VertexIndex(index));
+	}
+
+	return indices;
+}

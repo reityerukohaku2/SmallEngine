@@ -118,7 +118,6 @@ void IndexBuffer::use_make_function_to_create_this_object ()
 {
 }
 
-
 /// <summary>
 /// インデックスバッファの大きさを返す
 /// </summary>

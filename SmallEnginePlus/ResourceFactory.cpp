@@ -35,8 +35,7 @@ com_ptr<VertexBuffer> ResourceFactory::CreateVertexBufferByGeometries (com_ptr<I
 /// <returns></returns>
 com_ptr<IndexBuffer> ResourceFactory::CreateIndexBufferByGeometries (com_ptr<ID3D12Device> device, GeometryCollection geometries)
 {
-
-	UINT indexBufferSize = geometries.GetIndiceSize ();
+	UINT indexBufferSize = geometries.GetIndicesSize ();
 
 	auto indexBuffer = IndexBuffer::GetInstance (device, indexBufferSize);
 
