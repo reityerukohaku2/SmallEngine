@@ -49,16 +49,25 @@ bool Direct3D::Initialize(HWND hWnd)
 /// </summary>
 /// <returns>成功したらSUCCEEDED</returns>
 HRESULT Direct3D::InitModels () {
-	// 頂点の作成
+	// 頂点座標
 	vector<XMFLOAT3> vertexPositions = 
 	{
-		 { 0.0f, 0.57733f , 0.0f },
-		 { -0.5f, -0.288667f , 0.0f },
-		 { 0.5f, -0.288667f , 0.0f }
+		{ -0.5f, 0.5f , 0.0f },
+		{ -0.5f, -0.5f , 0.0f },
+		{ 0.5f, -0.5f , 0.0f },
+
+		{ 0.5f, 0.5f , 0.0f }
+	};
+
+	// 頂点インデックス
+	vector<DWORD> indices =
+	{
+		0, 1, 2,
+		0, 2, 3,
 	};
 
 	// 形状の作成
-	Geometry geometry = Geometry::CreateGeometryFromXMFloat3Array (vertexPositions);
+	Geometry geometry = Geometry::CreateGeometryFromPosAndIndex (vertexPositions, indices);
 
 	// 形状の追加
 	m_geometries.push_back(geometry);

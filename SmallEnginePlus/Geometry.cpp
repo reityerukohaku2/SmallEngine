@@ -5,7 +5,7 @@
 /// コンストラクタ(頂点インデックスあり)
 /// </summary>
 /// <param name="triangles"></param>
-Geometry::Geometry (VertexCollection vertices, vector<VertexIndex> indices) {
+Geometry::Geometry (VertexCollection vertices, VertexIndex indices) {
 	m_vertices = std::move (vertices);
 	m_indices = std::move (indices);
 }
@@ -15,10 +15,7 @@ Geometry::Geometry (VertexCollection vertices, vector<VertexIndex> indices) {
 /// </summary>
 /// <param name="triangles"></param>
 Geometry::Geometry (VertexCollection vertices) {
-	this->m_vertices = std::move (vertices);
-
-	void* data;
-	CD3DX12_RANGE readRange (0, 0);
+	m_vertices = std::move (vertices);
 }
 
 /// <summary>
@@ -29,9 +26,7 @@ Geometry::~Geometry () {
 		vertex.~Vertex ();
 	}
 
-	for (const auto index : m_indices) {
-		index.~VertexIndex ();
-	}
+	m_indices.~VertexIndex ();
 
 	m_vertices.clear();
 }
@@ -55,11 +50,36 @@ Geometry Geometry::CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPosit
 	return Geometry (vertices);
 }
 
+Geometry Geometry::CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indicesData)
+{
+	auto vertices = Vertex::CreateVerticesFromXMFLOAT3Array (vertexPositions);
+	auto indices = VertexIndex (indicesData);
+
+	return Geometry (vertices, indices);
+}
+
 
 /// <summary>
 /// 頂点数を取得する
 /// </summary>
 /// <returns>形状の頂点数</returns>
 int Geometry::GetVertexNum () {
-	return this->m_vertices.size();
+	return m_vertices.size();
+}
+
+/// <summary>
+/// 頂点インデックス数を取得する
+/// </summary>
+/// <returns>形状の頂点インデックス数</returns>
+int Geometry::GetIndexNum ()
+{
+	return m_indices.size();
+}
+
+/// <summary>
+/// 頂点インデックスを取得する
+/// </summary>
+/// <returns></returns>
+VertexIndex Geometry::GetIndices () {
+	return m_indices;
 }

@@ -17,4 +17,6 @@
 #include <dxgi1_4.h>
 
 using winrt::com_ptr;
+using namespace std;
+using std::vector;
 using namespace DirectX;

@@ -8,6 +8,105 @@
 GeometryCollection::GeometryCollection (vector<Geometry> geometries)
 {
     m_geometries = geometries;
+    m_vertexNum = CountVertexNum ();
+    m_indexNum = CountIndexNum ();
+}
+
+/// <summary>
+/// 形状に含まれる全ての頂点数を返す
+/// </summary>
+/// <returns></returns>
+UINT GeometryCollection::GetVertexNum ()
+{
+    return m_vertexNum;
+}
+
+/// <summary>
+/// 形状に含まれる全ての頂点インデックス数を返す
+/// </summary>
+/// <returns></returns>
+UINT GeometryCollection::GetIndexNum ()
+{
+    return m_indexNum;
+}
+
+/// <summary>
+/// 形状のバイト数を返す
+/// </summary>
+/// <returns></returns>
+UINT GeometryCollection::GetGeometriesSize ()
+{
+    return GetVertexNum () * sizeof (Vertex);
+}
+
+/// <summary>
+/// 頂点インデックスのバイト数を返す
+/// </summary>
+/// <returns>頂点インデックスのバイト数</returns>
+UINT GeometryCollection::GetIndicesSize ()
+{
+    return GetIndexNum () * sizeof (DWORD);
+}
+
+/// <summary>
+/// 全ての頂点情報を取得する
+/// </summary>
+VertexCollection GeometryCollection::GetVertices ()
+{
+    VertexCollection allVertices;
+
+    for (auto geometry : m_geometries) {
+        auto vertices = geometry.GetVertices ();
+
+        // 末尾に配列を追加
+        allVertices.insert (allVertices.end (), vertices.begin (), vertices.end ());
+    }
+
+    return allVertices;
+}
+
+/// <summary>
+/// 頂点インデックスを取得する
+/// </summary>
+/// <returns></returns>
+VertexIndex GeometryCollection::GetIndices ()
+{
+    VertexIndex allIndices;
+
+    for (auto geometry : m_geometries) {
+        auto indices = geometry.GetIndices ();
+        allIndices.insert (allIndices.end (), indices.begin (), indices.end ());
+    }
+
+    return allIndices;
+}
+
+/// <summary>
+/// 頂点数を再計算する
+/// </summary>
+/// <returns>全頂点数</returns>
+UINT GeometryCollection::CountVertexNum ()
+{
+    UINT vertexNum = 0;
+    for (auto geometry : m_geometries) {
+        vertexNum += geometry.GetVertexNum ();
+    }
+
+    return vertexNum;
+}
+
+/// <summary>
+/// 頂点インデックス数を再計算する
+/// </summary>
+/// <returns>全頂点インデックス数</returns>
+UINT GeometryCollection::CountIndexNum ()
+{
+    UINT indexNum = 0;
+    for (auto geometry : m_geometries) {
+        indexNum += geometry.GetIndexNum ();
+    }
+
+    return indexNum;
 }
 
 /// <summary>
@@ -17,6 +116,8 @@ GeometryCollection::GeometryCollection (vector<Geometry> geometries)
 void GeometryCollection::push_back (Geometry geometry)
 {
     m_geometries.push_back (geometry);
+    m_vertexNum += geometry.GetVertexNum();
+    m_indexNum += geometry.GetIndexNum();
 }
 
 /// <summary>
@@ -41,40 +142,19 @@ typename vector<Geometry>::const_iterator GeometryCollection::begin ()
 }
 
 /// <summary>
-/// 形状に含まれる全ての頂点数を返す
+/// targetPosの位置に配列を挿入する
 /// </summary>
+/// <param name="targetPos">挿入先</param>
+/// <param name="begin">挿入する配列の開始地点</param>
+/// <param name="end">挿入する配列の終了地点</param>
 /// <returns></returns>
-UINT GeometryCollection::GetVertexNum ()
-{
-    UINT vertexNum = 0;
-    for (auto geometry: m_geometries) {
-        vertexNum += geometry.GetVertexNum ();
-    }
-
-    return vertexNum;
-}
-
-/// <summary>
-/// 形状のバイト数を返す
-/// </summary>
-/// <returns></returns>
-UINT GeometryCollection::GetGeometriesSize ()
-{
-    return this->GetVertexNum () * sizeof(Vertex);
-}
-
-/// <summary>
-/// 全ての頂点情報を取得する
-/// </summary>
-VertexCollection GeometryCollection::GetVertices ()
-{
-    vector<Vertex> allVertices;
-    for (auto geometry : m_geometries) {
-        auto vertices = geometry.GetVertices ();
-        copy (vertices.begin (), vertices.end (), back_inserter (allVertices));
-    }
-
-    return allVertices;
+typename vector<Geometry>::const_iterator GeometryCollection::insert 
+(
+    typename vector<Geometry>::const_iterator targetPos, 
+    typename vector<Geometry>::const_iterator begin, 
+    typename vector<Geometry>::const_iterator end
+){
+    return m_geometries.insert (targetPos, begin, end);
 }
 
 /// <summary>
@@ -92,5 +172,6 @@ size_t GeometryCollection::size ()
 void GeometryCollection::clear ()
 {
     m_geometries.clear ();
+    m_vertexNum = 0;
 }
 

@@ -19,7 +19,7 @@ public:
 	/// </summary>
 	/// <param name="vertices">頂点</param>
 	/// <param name="indices">頂点インデックス</param>
-	Geometry (VertexCollection vertices, vector<VertexIndex> indices);
+	Geometry (VertexCollection vertices, VertexIndex indices);
 
 	/// <summary>
 	/// コンストラクタ(頂点インデックスなし)
@@ -39,10 +39,22 @@ public:
 	int GetVertexNum ();
 
 	/// <summary>
+	/// 頂点インデックス数を取得する
+	/// </summary>
+	/// <returns>形状の頂点インデックス数</returns>
+	int GetIndexNum ();
+
+	/// <summary>
 	/// 頂点情報を取得する
 	/// </summary>
 	/// <returns>頂点情報</returns>
 	VertexCollection GetVertices ();
+
+	/// <summary>
+	/// 頂点インデックスを取得する
+	/// </summary>
+	/// <returns></returns>
+	VertexIndex GetIndices ();
 
 	/// <summary>
 	/// 頂点情報配列を取得する
@@ -57,15 +69,31 @@ public:
 	/// <returns>形状</returns>
 	static Geometry CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPositions);
 
+	/// <summary>
+	/// 頂点座標群と頂点インデックスから形状を生成する
+	/// </summary>
+	/// <param name="vertexPositions">頂点座標</param>
+	/// <param name="indice">頂点インデックス</param>
+	/// <returns>形状</returns>
+	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indices);
+
+	/// <summary>
+	/// 頂点座標群と頂点インデックスから形状を生成する
+	/// </summary>
+	/// <param name="vertexPositions">頂点座標</param>
+	/// <param name="indice">頂点インデックス</param>
+	/// <returns>形状</returns>
+	static Geometry CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, VertexIndex indices);
+
 private:
 	/// <summary>
-	/// 頂点
+	/// 頂点群
 	/// </summary>
 	VertexCollection m_vertices;
 
 	/// <summary>
 	/// 頂点インデックス
 	/// </summary>
-	vector<VertexIndex> m_indices;
+	VertexIndex m_indices;
 
 };

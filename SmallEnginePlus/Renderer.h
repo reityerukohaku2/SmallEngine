@@ -74,6 +74,16 @@ private:
 	D3D12_VERTEX_BUFFER_VIEW            m_vertexBufferView;
 
 	/// <summary>
+	/// インデックスバッファ
+	/// </summary>
+	com_ptr<IndexBuffer>                m_indexBuffer;
+
+	/// <summary>
+	/// インデックスバッファビュー
+	/// </summary>
+	D3D12_INDEX_BUFFER_VIEW             m_indexBufferView;
+
+	/// <summary>
 	/// コンスタントバッファ
 	/// </summary>
 	com_ptr <ID3D12Resource> m_constantBuffer;
@@ -132,5 +142,9 @@ private:
 	ID3DBlob* vertexShader;
 	ID3DBlob* pixelShader;
 
+	/// <summary>
+	/// 描画する形状のコレクション
+	/// </summary>
+	GeometryCollection m_geometries;
 };
 

@@ -5,84 +5,80 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Geometry">
-      <UniqueIdentifier>{6bbcf704-c492-4a1c-865c-ce3cb0113754}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Geometry">
       <UniqueIdentifier>{e1c555ef-d4d6-480c-8a43-299eb6d71a1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Renderer">
-      <UniqueIdentifier>{98bfeb19-8741-46c4-ae35-a55a9703ccac}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Renderer">
       <UniqueIdentifier>{79f8cb15-2ce1-4b28-b21a-9c0d15de210f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Resources">
-      <UniqueIdentifier>{84d1e4b9-a25a-4d56-a103-bb8d2087f309}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Resources">
       <UniqueIdentifier>{4c83b776-44cf-4169-86ad-2d7a8adfb022}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Common">
-      <UniqueIdentifier>{fbff57b6-9c03-43e2-b4b9-802136610c27}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Common">
       <UniqueIdentifier>{11221e01-d7ed-4f51-8456-6d9bf1d5aba5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Geometry\Vertex">
+      <UniqueIdentifier>{2da0b928-d764-4af1-b888-86a424a63aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collection">
+      <UniqueIdentifier>{7cf53954-95bf-4ede-8691-c2345d5d838f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collection\Interface">
+      <UniqueIdentifier>{e88afd0d-3ad5-4532-846b-72e87fd69e1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SmallEnginePlus.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct3D.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="d3dx12.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>ヘッダー ファイル\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexIndex.h">
-      <Filter>ヘッダー ファイル\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry.h">
-      <Filter>ヘッダー ファイル\Geometry</Filter>
+      <Filter>ソース ファイル\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>ヘッダー ファイル\Renderer</Filter>
+      <Filter>ソース ファイル\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
-      <Filter>ヘッダー ファイル\Resources</Filter>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>ソース ファイル\Resources</Filter>
     </ClInclude>
     <ClInclude Include="ResourceFactory.h">
-      <Filter>ヘッダー ファイル\Resources</Filter>
+      <Filter>ソース ファイル\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>ソース ファイル\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallEnginePlus.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>ソース ファイル\Geometry\Vertex</Filter>
     </ClInclude>
     <ClInclude Include="GeometryCollection.h">
-      <Filter>ヘッダー ファイル\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="ICollection.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
+      <Filter>ソース ファイル\Collection</Filter>
     </ClInclude>
     <ClInclude Include="VertexCollection.h">
-      <Filter>ヘッダー ファイル\Geometry</Filter>
+      <Filter>ソース ファイル\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="ICollection.h">
+      <Filter>ソース ファイル\Collection\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexIndex.h">
+      <Filter>ソース ファイル\Collection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,12 +91,6 @@
     <ClCompile Include="Geometry.cpp">
       <Filter>ソース ファイル\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>ソース ファイル\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexIndex.cpp">
-      <Filter>ソース ファイル\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>ソース ファイル\Resources</Filter>
     </ClCompile>
@@ -110,14 +100,23 @@
     <ClCompile Include="ResourceFactory.cpp">
       <Filter>ソース ファイル\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="GeometryCollection.cpp">
-      <Filter>ソース ファイル\Geometry</Filter>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>ソース ファイル\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="ICollection.cpp">
-      <Filter>ソース ファイル\Common</Filter>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>ソース ファイル\Geometry\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryCollection.cpp">
+      <Filter>ソース ファイル\Collection</Filter>
     </ClCompile>
     <ClCompile Include="VertexCollection.cpp">
-      <Filter>ソース ファイル\Geometry</Filter>
+      <Filter>ソース ファイル\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="ICollection.cpp">
+      <Filter>ソース ファイル\Collection\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexIndex.cpp">
+      <Filter>ソース ファイル\Collection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

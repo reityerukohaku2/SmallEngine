@@ -19,6 +19,8 @@ Renderer::Renderer (GeometryCollection geometries, HWND hWnd)
 
 	m_hWnd = hWnd;
 
+	m_geometries = geometries;
+
 	//DX12デバイス作成
 	D3D12CreateDevice (0, D3D_FEATURE_LEVEL_12_0, IID_PPV_ARGS (&m_device));
 
@@ -55,16 +57,27 @@ Renderer::Renderer (GeometryCollection geometries, HWND hWnd)
 	CreatePilelineState ();
 
 	// 頂点バッファの作成
-	m_vertexBuffer = ResourceFactory::CreateVertexBufferByGeometries (m_device, geometries);
+	m_vertexBuffer = ResourceFactory::CreateVertexBufferByGeometries (m_device, m_geometries);
 
 	// 頂点バッファビューの作成
 	m_vertexBufferView.BufferLocation = m_vertexBuffer->GetGPUVirtualAddress();
-	m_vertexBufferView.SizeInBytes = geometries.GetGeometriesSize ();
-	m_vertexBufferView.StrideInBytes = sizeof (Vertex);
+	m_vertexBufferView.SizeInBytes = m_geometries.GetGeometriesSize ();
+	m_vertexBufferView.StrideInBytes = sizeof(Vertex);
+
+	// インデックスバッファの作成
+	m_indexBuffer = ResourceFactory::CreateIndexBufferByGeometries (m_device, m_geometries);
+
+	// インデックスバッファビューの作成
+	m_indexBufferView.BufferLocation = m_indexBuffer->GetGPUVirtualAddress ();
+	m_indexBufferView.Format = DXGI_FORMAT_R32_UINT;
+	m_indexBufferView.SizeInBytes = m_geometries.GetIndicesSize();
 }
 
 Renderer::Renderer(){}
 
+/// <summary>
+/// 描画
+/// </summary>
 void Renderer::Render ()
 {
 	//バックバッファが現在何枚目かを取得
@@ -76,7 +89,11 @@ void Renderer::Render ()
 	//コマンドリストをリセットする
 	m_commandList->Reset (m_commandAllocator.get(), m_pipelineState.get());
 
-	//ここからコマンドリストにコマンドを書き込んでいく
+
+	///////////////////////////////////////////////////
+	// ここからコマンドリストにコマンドを書き込んでいく
+	///////////////////////////////////////////////////
+
 
 	//バックバッファのトランジションをレンダーターゲットモードにする
 	auto resource_barrier = CD3DX12_RESOURCE_BARRIER::Transition (m_renderTargets[backBufferIndex].get (), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
@@ -121,8 +138,10 @@ void Renderer::Render ()
 
 	//バーテックスバッファをセット
 	m_commandList->IASetVertexBuffers (0, 1, &m_vertexBufferView);
+	//インデックスバッファをセット
+	m_commandList->IASetIndexBuffer (&m_indexBufferView);
 
-	//描画
+	// 回転
 	static float r = 0;
 	r += 0.05f;
 	rotMat = XMMatrixRotationZ (r);//単純にyaw回転させる
@@ -133,6 +152,7 @@ void Renderer::Render ()
 	UINT8* pCbvDataBegin;
 	m_constantBuffer->Map (0, &readRange, reinterpret_cast<void**>(&pCbvDataBegin));
 	Cbuffer cb;
+
 	//ワールドトランスフォーム
 	worldMat = rotMat * XMMatrixTranslation (0, 0, 0);
 	char* ptr = reinterpret_cast<char*>(pCbvDataBegin);
@@ -144,7 +164,8 @@ void Renderer::Render ()
 	m_commandList->SetGraphicsRootDescriptorTable (0, cbvSrvUavDescHeap);
 
 	//描画
-	m_commandList->DrawInstanced (3, 1, 0, 0);
+	auto instanceCount = m_geometries.GetIndexNum () / 3;
+	m_commandList->DrawIndexedInstanced (6, instanceCount, 0, 0, 0);
 
 	//バックバッファのトランジションをPresentモードにする
 	resource_barrier = CD3DX12_RESOURCE_BARRIER::Transition (m_renderTargets[backBufferIndex].get (), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
