@@ -164,7 +164,7 @@ void Renderer::Render ()
 	m_commandList->SetGraphicsRootDescriptorTable (0, cbvSrvUavDescHeap);
 
 	//描画
-	auto instanceCount = m_geometries.GetVertexNum () / 3;
+	auto instanceCount = m_geometries.GetIndexNum () / 3;
 	m_commandList->DrawIndexedInstanced (6, instanceCount, 0, 0, 0);
 
 	//バックバッファのトランジションをPresentモードにする

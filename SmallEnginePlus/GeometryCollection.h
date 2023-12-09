@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "Geometry.h"
+#include "VertexIndex.h"
 #include "VertexCollection.h"
 #include "ICollection.h"
 
@@ -17,6 +18,47 @@ public:
 	/// </summary>
 	/// <param name="geometries">Geometryの配列</param>
 	GeometryCollection (vector<Geometry> geometries);
+
+	/// <summary>
+	/// 形状内に存在する全ての頂点数を返す
+	/// </summary>
+	/// <returns>形状内に存在する全ての頂点数</returns>
+	UINT GetVertexNum ();
+
+	/// <summary>
+	/// 形状のバイト数を返す
+	/// </summary>
+	/// <returns></returns>
+	UINT GetGeometriesSize ();
+
+	/// <summary>
+	/// 全ての頂点情報を取得する
+	/// </summary>
+	VertexCollection GetVertices ();
+
+	/// <summary>
+	/// 全ての頂点インデックスを取得する
+	/// </summary>
+	/// <returns></returns>
+	VertexIndex GetIndices ();
+
+	/// <summary>
+	/// 頂点インデックスのバイト数を返す
+	/// </summary>
+	/// <returns>頂点インデックスのバイト数</returns>
+	UINT GetIndicesSize ();
+
+	/// <summary>
+	/// 頂点インデックスの数を返す
+	/// </summary>
+	/// <returns>頂点インデックスの数</returns>
+	UINT GetIndexNum ();
+
+
+
+	//***************************/
+	// ICollectionの純粋仮想関数
+	//***************************/
 
 	/// <summary>
 	/// 配列の末尾に要素を追加する
@@ -66,35 +108,6 @@ public:
 	/// 配列要素を全て削除
 	/// </summary>
 	void clear ();
-
-	/// <summary>
-	/// 形状内に存在する全ての頂点数を返す
-	/// </summary>
-	/// <returns>形状内に存在する全ての頂点数</returns>
-	UINT GetVertexNum ();
-
-	/// <summary>
-	/// 形状のバイト数を返す
-	/// </summary>
-	/// <returns></returns>
-	UINT GetGeometriesSize ();
-
-	/// <summary>
-	/// 全ての頂点情報を取得する
-	/// </summary>
-	VertexCollection GetVertices ();
-
-	/// <summary>
-	/// 頂点インデックスのバイト数を返す
-	/// </summary>
-	/// <returns>頂点インデックスのバイト数</returns>
-	UINT GetIndicesSize ();
-
-	/// <summary>
-	/// 頂点インデックスの数を返す
-	/// </summary>
-	/// <returns>頂点インデックスの数</returns>
-	UINT GetIndexNum ();
 
 private:
 	/// <summary>

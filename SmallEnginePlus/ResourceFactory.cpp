@@ -45,9 +45,9 @@ com_ptr<IndexBuffer> ResourceFactory::CreateIndexBufferByGeometries (com_ptr<ID3
 	indexBuffer->Map (0, &readRange, reinterpret_cast<void**>(&pIndexDataBegin));
 
 	// 頂点配列からプリミティブな座標の配列を生成
-	auto vertices = geometries.GetVertices ();
+	auto indices = geometries.GetIndices ();
 
-	memcpy (pIndexDataBegin.get (), vertices.data (), vertices.GetVerticesSize ());
+	memcpy (pIndexDataBegin.get (), indices.data (), indices.GetIndicesSize ());
 	indexBuffer->Unmap (0, NULL);
 
 	return indexBuffer;

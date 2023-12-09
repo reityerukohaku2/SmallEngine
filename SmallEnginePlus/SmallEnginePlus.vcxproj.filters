@@ -24,9 +24,6 @@
     <Filter Include="ソース ファイル\Geometry\Vertex">
       <UniqueIdentifier>{2da0b928-d764-4af1-b888-86a424a63aca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Geometry\VertexIndex">
-      <UniqueIdentifier>{e238f2fe-0e02-4ff2-97e7-18aec4444cc1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Collection">
       <UniqueIdentifier>{7cf53954-95bf-4ede-8691-c2345d5d838f}</UniqueIdentifier>
     </Filter>
@@ -71,9 +68,6 @@
     <ClInclude Include="Vertex.h">
       <Filter>ソース ファイル\Geometry\Vertex</Filter>
     </ClInclude>
-    <ClInclude Include="VertexIndex.h">
-      <Filter>ソース ファイル\Geometry\VertexIndex</Filter>
-    </ClInclude>
     <ClInclude Include="GeometryCollection.h">
       <Filter>ソース ファイル\Collection</Filter>
     </ClInclude>
@@ -83,7 +77,7 @@
     <ClInclude Include="ICollection.h">
       <Filter>ソース ファイル\Collection\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="VertexIndexCollection.h">
+    <ClInclude Include="VertexIndex.h">
       <Filter>ソース ファイル\Collection</Filter>
     </ClInclude>
   </ItemGroup>
@@ -112,9 +106,6 @@
     <ClCompile Include="Vertex.cpp">
       <Filter>ソース ファイル\Geometry\Vertex</Filter>
     </ClCompile>
-    <ClCompile Include="VertexIndex.cpp">
-      <Filter>ソース ファイル\Geometry\VertexIndex</Filter>
-    </ClCompile>
     <ClCompile Include="GeometryCollection.cpp">
       <Filter>ソース ファイル\Collection</Filter>
     </ClCompile>
@@ -124,7 +115,7 @@
     <ClCompile Include="ICollection.cpp">
       <Filter>ソース ファイル\Collection\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="VertexIndexCollection.cpp">
+    <ClCompile Include="VertexIndex.cpp">
       <Filter>ソース ファイル\Collection</Filter>
     </ClCompile>
   </ItemGroup>

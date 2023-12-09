@@ -160,7 +160,6 @@
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexCollection.h" />
     <ClInclude Include="VertexIndex.h" />
-    <ClInclude Include="VertexIndexCollection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3D.cpp" />
@@ -175,7 +174,6 @@
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexCollection.cpp" />
     <ClCompile Include="VertexIndex.cpp" />
-    <ClCompile Include="VertexIndexCollection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SmallEnginePlus.rc" />

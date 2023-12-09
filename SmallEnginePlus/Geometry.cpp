@@ -5,7 +5,7 @@
 /// コンストラクタ(頂点インデックスあり)
 /// </summary>
 /// <param name="triangles"></param>
-Geometry::Geometry (VertexCollection vertices, VertexIndexCollection indices) {
+Geometry::Geometry (VertexCollection vertices, VertexIndex indices) {
 	m_vertices = std::move (vertices);
 	m_indices = std::move (indices);
 }
@@ -26,9 +26,7 @@ Geometry::~Geometry () {
 		vertex.~Vertex ();
 	}
 
-	for (const auto index : m_indices) {
-		index.~VertexIndex ();
-	}
+	m_indices.~VertexIndex ();
 
 	m_vertices.clear();
 }
@@ -55,7 +53,7 @@ Geometry Geometry::CreateGeometryFromXMFloat3Array (vector<XMFLOAT3> vertexPosit
 Geometry Geometry::CreateGeometryFromPosAndIndex (vector<XMFLOAT3> vertexPositions, vector<DWORD> indicesData)
 {
 	auto vertices = Vertex::CreateVerticesFromXMFLOAT3Array (vertexPositions);
-	auto indices = VertexIndex::CreateIndicesFromDWORDArray (indicesData);
+	auto indices = VertexIndex (indicesData);
 
 	return Geometry (vertices, indices);
 }
@@ -76,4 +74,12 @@ int Geometry::GetVertexNum () {
 int Geometry::GetIndexNum ()
 {
 	return m_indices.size();
+}
+
+/// <summary>
+/// 頂点インデックスを取得する
+/// </summary>
+/// <returns></returns>
+VertexIndex Geometry::GetIndices () {
+	return m_indices;
 }
