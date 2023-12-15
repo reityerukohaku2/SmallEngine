@@ -2,22 +2,13 @@
 #include "pch.h"
 #include "Geometry.h"
 #include "VertexIndex.h"
-#include "VertexCollection.h"
-#include "ICollection.h"
 
 /// <summary>
 /// Geometryの配列
 /// </summary>
-class GeometryCollection : public ICollection<class Geometry>
+class GeometryCollection : private vector<Geometry>
 {
 public:
-	GeometryCollection () {};
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="geometries">Geometryの配列</param>
-	GeometryCollection (vector<Geometry> geometries);
 
 	/// <summary>
 	/// 形状内に存在する全ての頂点数を返す
@@ -34,7 +25,13 @@ public:
 	/// <summary>
 	/// 全ての頂点情報を取得する
 	/// </summary>
-	VertexCollection GetVertices ();
+	vector<Vertex> GetVertices ();
+
+	/// <summary>
+	/// 頂点のバイト数を返す
+	/// </summary>
+	/// <returns></returns>
+	UINT GetVerticesSize ();
 
 	/// <summary>
 	/// 全ての頂点インデックスを取得する
@@ -55,59 +52,17 @@ public:
 	UINT GetIndexNum ();
 
 
-
 	//***************************/
-	// ICollectionの純粋仮想関数
+	// vectorクラスの関数		
 	//***************************/
 
-	/// <summary>
-	/// 配列の末尾に要素を追加する
-	/// </summary>
-	/// <param name="geometry">追加する要素</param>
-	void push_back (Geometry geometry);
-
-	/// <summary>
-	/// 配列の先頭ポインタを返す
-	/// </summary>
-	/// <returns>配列の先頭ポインタ</returns>
-	Geometry* data ();
-
-	/// <summary>
-	/// 配列の開始地点を示すイテレーターを返す
-	/// </summary>
-	/// <returns></returns>
-	typename vector<Geometry>::const_iterator begin ();
-
-	/// <summary>
-	/// 配列の終了地点を示すイテレーターを返す
-	/// </summary>
-	/// <returns></returns>
-	typename vector<Geometry>::const_iterator end ();
-
-	/// <summary>
-	/// targetPosの位置に配列を挿入する
-	/// </summary>
-	/// <param name="targetPos">挿入先</param>
-	/// <param name="begin">挿入する配列の開始地点</param>
-	/// <param name="end">挿入する配列の終了地点</param>
-	/// <returns></returns>
-	typename vector<Geometry>::const_iterator insert 
-	(
-		typename vector<Geometry>::const_iterator targetPos, 
-		typename vector<Geometry>::const_iterator begin, 
-		typename vector<Geometry>::const_iterator end
-	);
-
-	/// <summary>
-	/// 配列の要素数を返す
-	/// </summary>
-	/// <returns></returns>
-	size_t size ();
-
-	/// <summary>
-	/// 配列要素を全て削除
-	/// </summary>
-	void clear ();
+	using vector::push_back;
+	using vector::data;
+	using vector::begin;
+	using vector::end;
+	using vector::insert;
+	using vector::size;
+	using vector::clear;
 
 private:
 	/// <summary>
@@ -121,11 +76,6 @@ private:
 	/// </summary>
 	/// <returns>全頂点インデックス数</returns>
 	UINT CountIndexNum ();
-
-	/// <summary>
-	/// 形状の配列
-	/// </summary>
-	vector<Geometry> m_geometries;
 
 	/// <summary>
 	/// 全頂点数
