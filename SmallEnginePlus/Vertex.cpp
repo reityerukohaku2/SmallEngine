@@ -28,8 +28,8 @@ XMVECTOR Vertex::GetXMVECTORPosition ()
 /// </summary>
 /// <param name="positions">頂点座標群</param>
 /// <returns>頂点情報の配列</returns>
-VertexCollection Vertex::CreateVerticesFromXMFLOAT3Array (vector<XMFLOAT3> positions) {
-	VertexCollection vertexArray = {};
+vector<Vertex> Vertex::CreateVerticesFromXMFLOAT3Array (vector<XMFLOAT3> positions) {
+	vector<Vertex> vertexArray = {};
 
 	// positionsからpositionを取り出し、Vertexオブジェクトを生成
 	for (const auto position : positions) {

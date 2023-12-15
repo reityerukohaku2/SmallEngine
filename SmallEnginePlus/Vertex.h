@@ -1,6 +1,5 @@
 #pragma once
 #include "pch.h"
-#include "VertexCollection.h"
 
 /// <summary>
 /// 頂点情報を持つクラス
@@ -30,7 +29,7 @@ public:
 	/// </summary>
 	/// <param name="positions">頂点座標群</param>
 	/// <returns>頂点情報の配列</returns>
-	static class VertexCollection CreateVerticesFromXMFLOAT3Array (vector<XMFLOAT3> positions);
+	static class vector<Vertex> CreateVerticesFromXMFLOAT3Array (vector<XMFLOAT3> positions);
 private:
 	/// <summary>
 	/// 頂点座標

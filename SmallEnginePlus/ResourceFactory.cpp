@@ -21,7 +21,7 @@ com_ptr<VertexBuffer> ResourceFactory::CreateVertexBufferByGeometries (com_ptr<I
 	// 頂点配列からプリミティブな座標の配列を生成
 	auto vertices = geometries.GetVertices ();
 
-	memcpy (pVertexDataBegin.get(), vertices.data(), vertices.GetVerticesSize());
+	memcpy (pVertexDataBegin.get(), vertices.data(), geometries.GetVerticesSize());
 	vertexBuffer->Unmap (0, NULL);
 
 	return vertexBuffer;

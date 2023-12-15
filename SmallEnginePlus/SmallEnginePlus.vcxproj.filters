@@ -18,17 +18,11 @@
     <Filter Include="ソース ファイル\Resources">
       <UniqueIdentifier>{4c83b776-44cf-4169-86ad-2d7a8adfb022}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Common">
-      <UniqueIdentifier>{11221e01-d7ed-4f51-8456-6d9bf1d5aba5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Geometry\Vertex">
       <UniqueIdentifier>{2da0b928-d764-4af1-b888-86a424a63aca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Collection">
-      <UniqueIdentifier>{7cf53954-95bf-4ede-8691-c2345d5d838f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Collection\Interface">
-      <UniqueIdentifier>{e88afd0d-3ad5-4532-846b-72e87fd69e1a}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Geometry\VertexIndex">
+      <UniqueIdentifier>{8d945f09-1482-45c0-9c3a-4cfa3d632b14}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -68,17 +62,11 @@
     <ClInclude Include="Vertex.h">
       <Filter>ソース ファイル\Geometry\Vertex</Filter>
     </ClInclude>
-    <ClInclude Include="GeometryCollection.h">
-      <Filter>ソース ファイル\Collection</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexCollection.h">
-      <Filter>ソース ファイル\Collection</Filter>
-    </ClInclude>
-    <ClInclude Include="ICollection.h">
-      <Filter>ソース ファイル\Collection\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="VertexIndex.h">
-      <Filter>ソース ファイル\Collection</Filter>
+      <Filter>ソース ファイル\Geometry\VertexIndex</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryCollection.h">
+      <Filter>ソース ファイル\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,17 +94,11 @@
     <ClCompile Include="Vertex.cpp">
       <Filter>ソース ファイル\Geometry\Vertex</Filter>
     </ClCompile>
-    <ClCompile Include="GeometryCollection.cpp">
-      <Filter>ソース ファイル\Collection</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexCollection.cpp">
-      <Filter>ソース ファイル\Collection</Filter>
-    </ClCompile>
-    <ClCompile Include="ICollection.cpp">
-      <Filter>ソース ファイル\Collection\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="VertexIndex.cpp">
-      <Filter>ソース ファイル\Collection</Filter>
+      <Filter>ソース ファイル\Geometry\VertexIndex</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryCollection.cpp">
+      <Filter>ソース ファイル\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

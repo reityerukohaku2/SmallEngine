@@ -147,7 +147,6 @@
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="GeometryCollection.h" />
-    <ClInclude Include="ICollection.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderer.h" />
@@ -158,21 +157,18 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="VertexCollection.h" />
     <ClInclude Include="VertexIndex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="GeometryCollection.cpp" />
-    <ClCompile Include="ICollection.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceFactory.cpp" />
     <ClCompile Include="SmallEnginePlus.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
-    <ClCompile Include="VertexCollection.cpp" />
     <ClCompile Include="VertexIndex.cpp" />
   </ItemGroup>
   <ItemGroup>
